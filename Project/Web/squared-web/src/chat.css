@@ -1,0 +1,19 @@
+/* BODY */
+
+body{
+	background-color: white;
+	font-family: Verdana, sans-serif;
+}
+
+/* MESSAGE STYLING */
+
+.username{
+	text-decoration: underline;
+	font-weight: bold;
+}
+p.player1{
+	color: #006600;
+}
+p.player2{
+	color: #001999;
+}
