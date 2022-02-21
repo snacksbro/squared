@@ -5,14 +5,14 @@
 	text-align: center;
 	vertical-align: middle;
 	margin: 2px auto 2px auto;
-	border: 5px solid red;
+	/*border: 5px solid red;*/
 }
 
 /* ENTIRE GAME BOARD */ 
 
 #board-area{
 	grid-area: board;
-	border: 5px solid purple;
+	/*border: 5px solid purple;*/
 }
 #board td{
 	width: 45px;
@@ -48,7 +48,7 @@
 /* OPTIONS AREA */
 
 #options-area{
-	border: 5px solid blue;
+	/*border: 5px solid blue;*/
 	grid-area: options;
 	display: grid;
 	grid-template:	"options1 options2" 20vh
@@ -106,7 +106,7 @@
 #chat-area{
 	grid-area: chat;
 	padding: 2px auto 2px auto;
-	border: 5px solid green;
+	/*border: 5px solid green;*/
 	display: grid;
 	grid-template:	"chatbox chatbox" 70vh
 			"message chat-submit" 20vh
