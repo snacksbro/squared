@@ -114,14 +114,14 @@
 }
 
 /* BODY / BACKGROUND */
-
+/*This doesnt belong here, keep the css styling specific to the component  */
 body{
-	background-image: url("../images/squared-background.png");
+/*	background-image: url("../images/squared-background.png");
 	background-image-opacity: 0.2;
 	display: grid;
 	grid-template:  "title title options options" 20vh
 			"board board chat chat" 80vh
-			/ 5fr 5fr 4fr 4fr;
+			/ 5fr 5fr 4fr 4fr;*/
 }
 
 /* DYNAMIC UI */
