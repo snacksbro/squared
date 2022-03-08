@@ -11,8 +11,19 @@ game = [
 			"roll": 3}]
 
 @app.route('/diceroll')
-def RandListd6():
+def RandD6():
     return random.randint(1,6)
+
+@app.route('/itemlist')
+def RandListGen(RandomList, ItemCount):
+    ItemList = []
+
+    for i in range(ItemCount):
+        ListInteger = random.randint(0, len(RandomList)-1)
+        ItemList.append(RandomList[ListInteger])
+        RandomList.remove(RandomList[ListInteger])
+		ItemList.sort()
+    return ItemList
 
 @app.route('/')
 def index():
