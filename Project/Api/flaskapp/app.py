@@ -1,15 +1,18 @@
 from flask import Flask
+from flask import requests
 import random
 
 app = Flask(__name__)
 game = [
-		{"players": ["user1", "user2"],
-			"playerColors": ["red", "blue"],
-			"board": [["red", "blue", "none"],
+		{"players": ["user1", "user2"], # Each player
+			"playerColors": ["red", "blue"], # What color each player is
+			"positions": ["a1", "j1"], # Where each player is
+			"board": [["red", "blue", "none"], # The whole board
 								["none", "blue", "blue"]],
-			"turn": "user1",
-			"roll": 3}
+			"turn": "user1", # Whose turn it is
+			"roll": 3} # The current players turn
 ]
+# TODO: Add a /queue route. Players who join the game will go there, once there's 4, add them to a game
 runningGames = []
 
 def gameCreate(players): # from lobby we'll queue players
