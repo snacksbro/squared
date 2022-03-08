@@ -1,8 +1,11 @@
 from flask import Flask
 from flask import request
+from flask_cors import CORS
 import random
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}}) # Basically let React send requests
+
 game = [
 		{"players": ["user1", "user2"], # Each player
 			"playerColors": ["red", "blue"], # What color each player is
@@ -35,7 +38,7 @@ def gameCreate(players): # from lobby we'll queue players
 
 @app.route('/diceroll')
 def RandD6():
-    return random.randint(1,6)
+    return str(random.randint(1,6))
 
 @app.route('/itemlist')
 def RandListGen(RandomList, ItemCount):
