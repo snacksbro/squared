@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import Chat from "../chat/chat"
+import Die4 from '../../images/four.png'
 
-class ChatBox extends React.Component {
+class Dice extends React.Component {
 		constructor(props) {
 			super(props);
 		}
@@ -20,16 +20,12 @@ class ChatBox extends React.Component {
 
     render() {
 			return (
-				<div id="chat-area">
-					<Chat/>
-					<form action="index.html" method="post">
-						<input id="message" type="text" name="message" placeholder="Say hello!" required="required"/>
-						<input id="chat-submit" type="submit" name="message"/>
-					</form>
+				<div id="dice-area">
+					<img src={Die4} width="100px" height="100px" title="Four" alt="Four"/>
 				</div>
 			);
-
 		}
 }
 
-export default ChatBox;
+export default Dice;
+

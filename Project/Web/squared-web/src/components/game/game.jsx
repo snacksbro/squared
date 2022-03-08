@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Chat from "../chat/chat"
 import Board from "./board"
 import ChatBox from "./chatbox"
+import Dice from "./dice"
 import "../../styletheme/chat/chat.css"
 class Game extends React.Component{
     state = {
@@ -33,6 +34,7 @@ class Game extends React.Component{
                
 					<Board/>
 					<ChatBox/>
+					<Dice/>
             </React.Fragment>
         )
     }
