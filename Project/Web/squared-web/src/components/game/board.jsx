@@ -1,81 +1,91 @@
 import React, {Component} from 'react'
 
 class Square extends React.Component {
-		constructor(props) {
-			super(props);
-		}
+	constructor(props) {
+		super(props);
+		this.sendRequest = this.sendRequest.bind(this);
+	}
 
-    async componentDidMount() {
-        //called when the page is loaded
-    }
+	sendRequest() {
+		let req = new XMLHttpRequest();
+		req.addEventListener("load", () => {
+			alert(req.responseText);
+		});
+		// TODO: Add some sort of environment variable to specify IP
+		req.open("GET", "http://127.0.0.1:5000/diceroll");
+		req.send();
+	}
 
-    componentDidMount() {
-        //called immediately after a component is mounted (created)
-    }
+	async componentDidMount() {
+		//called when the page is loaded
+	}
 
-    componentWillUnmount() {
-         //called immediately before a component is unmounted (destroyed)
-    }
+	componentDidMount() {
+		//called immediately after a component is mounted (created)
+	}
 
-    render() {
-			return <td id={this.props.squareID}></td>
-		}
+	componentWillUnmount() {
+		//called immediately before a component is unmounted (destroyed)
+	}
+
+	render() {
+		return <td id={this.props.squareID} onClick={this.sendRequest}></td>
+	}
 }
 
 class BoardRow extends React.Component {
 	constructor(props) {
-			super(props);
-		}
+		super(props);
+	}
 
-    async componentDidMount() {
-        //called when the page is loaded
-    }
+	async componentDidMount() {
+	//called when the page is loaded
+	}
 
-    componentDidMount() {
-        //called immediately after a component is mounted (created)
-    }
+	componentDidMount() {
+	//called immediately after a component is mounted (created)
+	}
 
-    componentWillUnmount() {
-         //called immediately before a component is unmounted (destroyed)
-    }
+	componentWillUnmount() {
+	 //called immediately before a component is unmounted (destroyed)
+	}
 
-    render() {
-			let row = [];
-			for (let i = 1; i <= 11; i++) {
-				row.push(<Square squareID={i + this.props.rowChar}/>);
-			}
+	render() {
+	let row = [];
+	for (let i = 1; i <= 11; i++) {
+		row.push(<Square squareID={i + this.props.rowChar}/>);
+	}
 
-			return (
-				<tr>
-				{row}
-					
-				</tr>)
-		}
+	return (
+	<tr>
+	{row}
+	</tr>)
+	}
 }
 
 
 class Board extends React.Component{
-    state = {
+		state = {
 
-    }
-
-
-    async componentDidMount(){
-        //called when the page is loaded
-    }
-
-    componentDidMount(){
-        //called immediately after a component is mounted (created)
-
-    }
-
-    componentWillUnmount() {
-         //called immediately before a component is unmounted (destroyed)
+		}
 
 
-    }
+		async componentDidMount(){
+				//called when the page is loaded
+		}
 
-    render(){
+		componentDidMount(){
+				//called immediately after a component is mounted (created)
+
+		}
+
+		componentWillUnmount() {
+				 //called immediately before a component is unmounted (destroyed)
+
+
+		}
+
+		render(){
 			//return(<Square squareID="testid"/>);
 			let boardCharacters = "abcdefghijk";
 			let boardObj = [];
@@ -87,5 +97,5 @@ class Board extends React.Component{
 		}
 }
 
-export default Board
+export default Board;
 
