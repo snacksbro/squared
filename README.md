@@ -4,7 +4,9 @@ Squared is an upcoming multiplayer competitive board-game where the objective is
 ## Installation
 Obtain a copy of [Python3](https://www.python.org/downloads/), [Pip3](https://pip.pypa.io/en/stable/installation/), and then execute
 > pip3 install flask
+
 > pip3 install flask_cors
+
 > npm install
 
 ## Running Locally
