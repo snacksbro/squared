@@ -6,10 +6,12 @@ app = Flask(__name__)
 def index():
     return '<h1>Squared</h1>'
 
-
+#local/login_user
 @app.route('/login_user')
 def login_user():
     '''
     fetch the params and process the request 
     validate the params using joi
     '''
+
+  
