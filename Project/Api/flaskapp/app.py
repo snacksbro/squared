@@ -55,6 +55,10 @@ def RandListGen(RandomList, ItemCount):
 def index():
     return '<h1>Squared</h1>'
 
+<<<<<<< HEAD
+#local/login_user
+=======
+>>>>>>> bbb0eb8b3a4c314ed640bf4015ceaaf5e42c585d
 @app.route('/login_user')
 def login_user():
     '''
@@ -62,3 +66,7 @@ def login_user():
     validate the params using joi
     '''
 
+<<<<<<< HEAD
+  
+=======
+>>>>>>> bbb0eb8b3a4c314ed640bf4015ceaaf5e42c585d
