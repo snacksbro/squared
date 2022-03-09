@@ -1,2 +1,4 @@
 # Not committing the flask cache
 Project/Api/flaskapp/__pycache__/ 
+Project/Web/squared-web/package-lock.json
+Project/Web/squared-web/package.json
