@@ -56,6 +56,10 @@ def RandListGen(RandomList, ItemCount):
 def index():
     return '<h1>Squared</h1>'
 
+@app.route('/parse')
+def StringParser(StringToBeParsed):
+	ParsedList = StringToBeParsed.split(",")
+	return jsonify(ParsedList)
 
 @app.route('/login_user')
 def login_user():
