@@ -36,15 +36,20 @@ class Game extends React.Component{
                 {/*Please place your HTML5 within the React.Fragment block  */}
                
 					<div id="game-container">
-						<ScoreBar players={["red", "blue"]} scores={[12, 14]}/>
-						<Board/>
-						<ChatBox/>
-						<Dice/>
+						<div id="left-view">
+							<Dice/>
+						</div>
+						<div id="main-view">
+							<ScoreBar players={["red", "blue"]} scores={[12, 14]}/>
+							<Board/>
+						</div>
+						<div id="right-view">
+							<ChatBox/>
+						</div>
 					</div>
             </React.Fragment>
         )
     }
-
 }
 
 export default Game

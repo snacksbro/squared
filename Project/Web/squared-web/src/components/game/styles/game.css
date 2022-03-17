@@ -1,9 +1,22 @@
 #game-container {
 	margin: auto;
+	display: flex;
 }
+
 @media screen and (min-width: 993px) {
-	#game-container {
+	#main-view {
 		width: 50%;
 	}
+}
+
+#main-view {
+}
+
+#left-view {
+	width: 25%;
+}
+
+#right-view {
+	width: 25%;
 }
 
