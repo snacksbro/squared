@@ -3,7 +3,10 @@ import Chat from "../chat/chat"
 import Board from "./board"
 import ChatBox from "./chatbox"
 import Dice from "./dice"
+import ScoreBar from "./scorebar"
 import "../../styletheme/chat/chat.css"
+import "./styles/game.css"
+
 class Game extends React.Component{
     state = {
 
@@ -32,9 +35,12 @@ class Game extends React.Component{
             <React.Fragment>
                 {/*Please place your HTML5 within the React.Fragment block  */}
                
-					<Board/>
-					<ChatBox/>
-					<Dice/>
+					<div id="game-container">
+						<ScoreBar players={["red", "blue"]} scores={[12, 14]}/>
+						<Board/>
+						<ChatBox/>
+						<Dice/>
+					</div>
             </React.Fragment>
         )
     }
@@ -42,5 +48,4 @@ class Game extends React.Component{
 }
 
 export default Game
-
 

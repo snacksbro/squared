@@ -1,0 +1,9 @@
+#game-container {
+	margin: auto;
+}
+@media screen and (min-width: 993px) {
+	#game-container {
+		width: 50%;
+	}
+}
+
