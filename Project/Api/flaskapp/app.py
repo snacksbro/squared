@@ -56,7 +56,6 @@ def RandListGen(RandomList, ItemCount):
 def index():
     return '<h1>Squared</h1>'
 
-@app.route('/parse')
 def StringParser(StringToBeParsed):
 	ParsedList = StringToBeParsed.split(",")
 	return ParsedList
@@ -65,14 +64,12 @@ def StringParser(StringToBeParsed):
 def VerifyTile(TileString):
 	if "none" in StringParser(TileString):
 		return 0
-	elif "red" in StringParser(TileString):
-		return 1
-	elif "blue" in StringParser(TileString):
-		return 2
-	elif "none" in StringParser(TileString):
-		return 3
 	elif "trap" in StringParser(TileString):
-		return 4
+		return 1
+	elif "red" in StringParser(TileString):
+		return 2
+	elif "blue" in StringParser(TileString):
+		return 3
 
 @app.route('/login_user')
 def login_user():
