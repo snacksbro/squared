@@ -59,7 +59,20 @@ def index():
 @app.route('/parse')
 def StringParser(StringToBeParsed):
 	ParsedList = StringToBeParsed.split(",")
-	return jsonify(ParsedList)
+	return ParsedList
+
+@app.route('/verify')
+def VerifyTile(TileString):
+	if "none" in StringParser(TileString):
+		return 0
+	elif "red" in StringParser(TileString):
+		return 1
+	elif "blue" in StringParser(TileString):
+		return 2
+	elif "none" in StringParser(TileString):
+		return 3
+	elif "trap" in StringParser(TileString):
+		return 4
 
 @app.route('/login_user')
 def login_user():
