@@ -17,11 +17,6 @@ class Game extends React.Component{
         //called when the page is loaded
     }
 
-    componentDidMount(){
-        //called immediately after a component is mounted (created)
-
-    }
-
     componentWillUnmount() {
          //called immediately before a component is unmounted (destroyed)
 
