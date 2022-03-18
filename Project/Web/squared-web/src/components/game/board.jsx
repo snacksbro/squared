@@ -15,7 +15,7 @@ class Square extends React.Component {
 			alert(req.responseText);
 		});
 		// TODO: Add some sort of environment variable to specify IP
-		req.open("GET", "http://127.0.0.1:5000/diceroll");
+		req.open("GET", "http://127.0.0.1:5000/verify?square=" + this.props.squareID);
 		req.send();
 	}
 
