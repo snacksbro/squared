@@ -7,6 +7,8 @@ import random
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}}) # Basically let React send requests
 
+game = [None] * 99999
+'''
 game = [
 		{"players": ["user1", "user2"], # Each player
 			"playerColors": ["red", "blue"], # What color each player is
@@ -16,6 +18,7 @@ game = [
 			"turn": "user1", # Whose turn it is
 			"roll": 3} # The current players turn
 ]
+'''
 # TODO: Add a /queue route. Players who join the game will go there, once there's 4, add them to a game
 runningGames = []
 
@@ -26,17 +29,20 @@ def gameCreate(players): # from lobby we'll queue players
 	# Generate the board
 	board = []
 	for x in range(10):
+		row = []
 		for y in range(10):
-			board[x][y] = "none"
+			row.append("none")
+		board.append(row)
 
 	game[gameID] = {
 			"players": ["test1", "test2"],
 			"playerColors": ["red", "blue"],
+			"positions": ["1a", "10k"],
 			"board": board,
 			"turn": "test1",
 			"roll": 0
 	}
-
+gameCreate(["test1", "test2"])
 
 @app.route('/diceroll')
 def RandD6():
@@ -72,34 +78,36 @@ def isAdjacent(coord1, coord2):
 	]
 	
 	# Checking if any of them "hit" coord2
-	for possiblitiy in possibilities:
+	for possibility in possibilities:
 		# If so, return True
-		if possiblitiy[0] == coord2[0] and possiblitiy[1] == coord2[1]:
+		if possibility[0] == coord2[0] and possibility[1] == coord2[1]:
 			return True
 	# If not, return False
 	return False
 
 # translateSquare: Takes in a square ("a2" for example) and returns an index ([0, 2] for example)
+# TODO: Need a case for double-digit numbers
 def translateSquare(square):
 	alphabet = "abcdefghijk"
-	return [alphabet.index(square[0]), int(square[1])]
+	return [int(square[0]), alphabet.index(square[1])]
 
 @app.route('/verify')
 def VerifyTile():
 	# TODO: Add gameid to this
-	position = translateSquare(game[gameID].positions[game[gameID].players.index(game[gameID].turn)])
+	position = translateSquare(game[gameID]["positions"][game[gameID]["players"].index(game[gameID]["turn"])])
 	target = translateSquare(request.args.get("square"))
-	TileString = game[gameID].board[target[0]][target[1]]
+	TileString = game[gameID]["board"][target[0]][target[1]]
 
 	if (isAdjacent(position, target)):
 		if "none" in StringParser(TileString):
-			return 0
+			return str(0)
 		elif "trap" in StringParser(TileString):
-			return 1
+			return str(1)
 		elif "red" in StringParser(TileString):
-			return 2
+			return str(2)
 		elif "blue" in StringParser(TileString):
-			return 3
+			return str(3)
+	return str(-1)
 
 @app.route('/login_user')
 def login_user():
