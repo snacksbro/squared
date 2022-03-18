@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-// Essentially, this is everything that makes up the board rows/cols itself
+import http from '../../services/general/httpService.js'
 
+// Essentially, this is everything that makes up the board rows/cols itself
 class Square extends React.Component {
 	constructor(props) {
 		super(props);
@@ -10,6 +11,11 @@ class Square extends React.Component {
 	// sendRequest: Sends a basic request to the flask server
 	// TODO: Make this a generic function that can be used anywhere
 	sendRequest() {
+		http.get("http://127.0.0.1:5000/verify?square=" + this.props.squareID)
+			.then(function(res) {
+				alert(res.data);
+			});
+		/*
 		let req = new XMLHttpRequest();
 		req.addEventListener("load", () => {
 			alert(req.responseText);
@@ -17,6 +23,7 @@ class Square extends React.Component {
 		// TODO: Add some sort of environment variable to specify IP
 		req.open("GET", "http://127.0.0.1:5000/verify?square=" + this.props.squareID);
 		req.send();
+		*/
 	}
 
 	async componentDidMount() {
