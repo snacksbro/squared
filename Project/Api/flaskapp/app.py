@@ -53,7 +53,7 @@ def WaitlistNext(WaitList, PlayerName):
 
 @app.route('/verifywaitlistcount') # Check if sufficient players are in the queue
 def VerifyWaitlistCount(WaitList, PlayerCount):
-	if len(WaitList) == PlayerCount:
+	if len(WaitList) >= PlayerCount:
 		return 1
 	else:
 		return 0
