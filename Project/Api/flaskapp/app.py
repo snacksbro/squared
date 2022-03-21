@@ -35,13 +35,35 @@ def gameCreate(players): # from lobby we'll queue players
 			"turn": "test1",
 			"roll": 0
 	}
+WaitList =  [] # Queue initialization
+@app.route('/waitlistjoin') # If player wants to join queue
+def WaitlistJoin(WaitList, PlayerName):
+	WaitList.append(PlayerName)
+	return WaitList
+
+@app.route('/leavewaitlist') # If player wants to leave queue
+def LeaveWaitlist(WaitList, PlayerName):
+	WaitList.remove(PlayerName)
+	return WaitList
+
+@app.route('/waitlistnext') # Next in line joins game
+def WaitlistNext(WaitList, PlayerName):
+	del WaitList[0]
+	return WaitList
+
+@app.route('/verifywaitlistcount') # Check if sufficient players are in the queue
+def VerifyWaitlistCount(WaitList, PlayerCount):
+	if len(WaitList) == PlayerCount:
+		return 1
+	else:
+		return 0
 
 
-@app.route('/diceroll')
+@app.route('/diceroll') # Generates a random 6 sided die roll
 def RandD6():
     return str(random.randint(1,6))
 
-@app.route('/itemlist')
+@app.route('/itemlist') # Generates a list of items from a given list
 def RandListGen(RandomList, ItemCount):
     ItemList = []
 
@@ -56,11 +78,11 @@ def RandListGen(RandomList, ItemCount):
 def index():
     return '<h1>Squared</h1>'
 
-def StringParser(StringToBeParsed):
+def StringParser(StringToBeParsed): # Parses string for verification
 	ParsedList = StringToBeParsed.split(",")
 	return ParsedList
 
-@app.route('/verify')
+@app.route('/verify') # Verifies tile data
 def VerifyTile(TileString):
 	if "none" in StringParser(TileString):
 		return 0
