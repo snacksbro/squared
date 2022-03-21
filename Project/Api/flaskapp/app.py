@@ -51,6 +51,14 @@ def WaitlistNext(WaitList, PlayerName):
 	del WaitList[0]
 	return WaitList
 
+@app.route('/gamenext') # Generates a list of people for a game and removes them from the waitlist
+def GameNext(WaitList, PlayerCount):
+	PlayerList = []
+	for i in range(PlayerCount):
+		PlayerList.append(WaitList[0])
+		del WaitList[0]
+	return PlayerList
+
 @app.route('/verifywaitlistcount') # Check if sufficient players are in the queue
 def VerifyWaitlistCount(WaitList, PlayerCount):
 	if len(WaitList) >= PlayerCount:
