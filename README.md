@@ -23,9 +23,13 @@ Navigate to `Project/Web/squared-web`, then execute `npm start`. This will start
 
 ## Contact
 Keijaoh Campbell - keijaoh.campbell@maine.edu
+
 Jeffrey Fosgate - jeffrey.fosgate@maine.edu
+
 Jacob Lorenzo - jacob.w.lorenzo@maine.edu
+
 Shea Keegan - shea.keegan@maine.edu
+
 Tyler Walker - tyler.j.walker@maine.edu
 
 ## License
