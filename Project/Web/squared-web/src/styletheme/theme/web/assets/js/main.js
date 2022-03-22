@@ -16,7 +16,7 @@ jQuery(function ($) {
             var anchor = $(this);
             $('html, body').stop().animate({
                 scrollTop: $(anchor.attr('href')).offset().top - 100
-            }, 100);
+            }, 1500);
             e.preventDefault();
         });
         $(document).on('click','.navbar-collapse.in',function(e) {
@@ -27,21 +27,6 @@ jQuery(function ($) {
 		$('.navbar .navbar-nav li a').on('click', function(){
             $('.navbar-collapse').collapse('hide');
             $('.burger-menu').removeClass('active');
-		});
-
-        // Button Hover JS
-		$('.default-btn')
-		.on('mouseenter', function(e) {
-			var parentOffset = $(this).offset(),
-			relX = e.pageX - parentOffset.left,
-			relY = e.pageY - parentOffset.top;
-			$(this).find('span').css({top:relY, left:relX})
-		})
-		.on('mouseout', function(e) {
-			var parentOffset = $(this).offset(),
-			relX = e.pageX - parentOffset.left,
-			relY = e.pageY - parentOffset.top;
-			$(this).find('span').css({top:relY, left:relX})
 		});
 
 		// Preloader

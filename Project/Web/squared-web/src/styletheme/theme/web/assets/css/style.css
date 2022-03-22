@@ -54,7 +54,6 @@ a {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   color: #000000;
-  text-decoration: none;
 }
 
 a:hover, a:focus {
@@ -495,10 +494,6 @@ Banner Area CSS
 .main-banner .banner-form p {
   margin-bottom: 30px;
   text-align: center;
-}
-
-.main-banner .banner-form form .form-group {
-  margin-bottom: 15px;
 }
 
 .main-banner .banner-form form .form-control {
@@ -2084,7 +2079,7 @@ Contact Area CSS
   border: 1px solid #dadada;
   border-radius: 50%;
   color: #646464;
-  font-size: 15px;
+  font-size: 20px;
   position: relative;
   text-align: center;
 }
