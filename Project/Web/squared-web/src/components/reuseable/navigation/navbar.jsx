@@ -7,7 +7,7 @@ import '../../../index.css';
 const NavBar = ({ user, currentProfile }) => {
   //On load get the profile info from me
 
-
+/*
   //On load get the profile info from me
 //mobile start 
 const COLORS = {
@@ -129,61 +129,112 @@ const ItemLink = styled(NavLink)`
 `
 
 const [click, setClick] = useState(false)
-const handleClick = () => setClick(!click)
+const handleClick = () => setClick(!click)*/
 
 
 //mobbile end
 
   return (
     <React.Fragment>
-      {/* NAVIGATION */}
+  <header id="nav-header">
+
+{/* Start Navbar Area */}
+
+        <nav className="navbar  navbar-light bg-light ">
+            <div className="container-fluid">
+                <div className="logo">
+                    <a href="index.html">
+                        <h3>Squared</h3>
+                    </a>
+                </div>
+
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+            
+                <div className="collapse navbar-collapse list-style" >
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                         
+                            <Link className="nav-link" to="/">Home</Link>
+                        </li>
+
+                        <li className="nav-item">
+                       
+                            <Link className="nav-link" to="/game">Play Game</Link>
+                        </li>
+
+                        <li className="nav-item">
+                          <Link className="nav-link" to="/leaderboard">Leaderboard</Link>
+                        </li>
+
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/learngame">Learn</Link>
+                        </li>
+
+           
+                    </ul>
+
+                    <div className="others-option">
+                        <div className="d-flex align-items-center">
+                            <div className="option-item">
+                             
+                                <Link to="#" className="default-btn">Login</Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {/* End Navbar Area */}
+</header>
+      {/* NAVIGATION 
       <header id="nav-header">
         <nav
           id="nav-bar"
-          class="top-bar fluid-width block-color nav-center sticky-nav animation fadeInDown"
+          className="top-bar fluid-width block-color nav-center sticky-nav animation fadeInDown"
         >
           <div id="nav-wrapper">
       
 
-            {/*<div id="mobile-nav">
-              <i class="de-icon-menu"></i>
-                    </div>*/}
+           
                     <div >
               
                     </div>
-                    {/*Will re-add the mobile menu when the website theme is added */}
+                  
             <div className="mobile-nav" hidden>
                       <MenuLabel id="mobile-nav" htmlFor="navi-toggle" onClick={handleClick}>
-                      <i style={{ color: "white"}} class="de-icon-menu"></i>
+                      <i style={{ color: "white"}} className="de-icon-menu"></i>
                     
                       </MenuLabel>
                       <NavBackground clicked={click}>&nbsp;</NavBackground>
                     </div>
 
             <ul id="nav-menu">
-              <li class="first-child">
-                <Link to="/">Home</Link>
-           
-              </li>
+         
         
               <li>
-                <Link to="/game">Play Game</Link>
+              
               </li>
               <li>
-                <Link to="/leaderboard">Leaderboard</Link>
+              
               </li>
-              <li class="first-child split-margin">
-                <Link to="/learngame">Learn</Link>
+              <li className="first-child split-margin">
+                
           
               </li>
        
               <li>
-                <Link to="#">Login</Link>
+              
               </li>
             
             </ul>
 
-            <div class="clearboth"></div>
+            <div className="clearboth"></div>
+
+
+
+
 
     <div className="btn-box">
                       <Navigation clicked={click}>
@@ -216,7 +267,7 @@ const handleClick = () => setClick(!click)
           </div>
         </nav>
       </header>{' '}
-      {/* END of NAVIGATION */}
+     END of NAVIGATION */}
     </React.Fragment>
   )
 }

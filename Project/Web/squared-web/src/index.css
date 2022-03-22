@@ -172,3 +172,11 @@ img.score-player{
 #dice-area{
 	grid-area: dice;
 }
+
+.list-style{
+
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	
+}

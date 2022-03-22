@@ -5,6 +5,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'
 
+//website theme css
+
+
+import "../src/styletheme/theme/web/assets/css/animate.min.css"
+
+import "../src/styletheme/theme/web/assets/css/fontawesome.min.css"
+import "../src/styletheme/theme/web/assets/css/odometer.css"
+import "../src/styletheme/theme/web/assets/css/magnific-popup.min.css"
+import "../src/styletheme/theme/web/assets/css/slick.min.css"
+import "../src/styletheme/theme/web/assets/css/style.css"
+import "../src/styletheme/theme/web/assets/css/responsive.css"
+
+
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
