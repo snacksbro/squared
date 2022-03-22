@@ -5,8 +5,13 @@ Squared is an upcoming multiplayer competitive board-game where the objective is
 Obtain a copy of [Python3](https://www.python.org/downloads/), [Pip3](https://pip.pypa.io/en/stable/installation/), and then execute
 > pip3 install flask
 
+> pip3 install flask_cors
+
+> npm install
+
 ## Running Locally
-In `Project/Api/flaskapp`, simply execute `flask run`. This will run the server on `http://localhost:5000`.
+In `Project/Api/flaskapp`, simply execute `flask run`. This will run the API server on `http://localhost:5000`.
+Navigate to `Project/Web/squared-web`, then execute `npm start`. This will start the frontend server.
 
 ## Project Layout
 `Deliverables/` is where assignment deliverables are kept.

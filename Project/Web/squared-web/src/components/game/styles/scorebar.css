@@ -1,0 +1,32 @@
+/* Individual items */
+#scorebar div {
+	display: inline;
+	padding-right: 10%;
+}
+
+/* TODO: Mobile support */
+#scorebar {
+	/* Bar itself */
+	padding: .25em;
+	background-color: grey;
+	border-radius: 15px;
+	margin: 5px auto 5px auto;
+	width: 70%;
+
+	/* Font */
+	color: white;
+	font-size: 2em;
+	font-weight: bold;
+
+	/* Align the items */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.icon {
+	width: 1em !important;
+	height: 1em !important;
+	align: center;
+}
+

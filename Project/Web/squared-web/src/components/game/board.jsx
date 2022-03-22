@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+// Essentially, this is everything that makes up the board rows/cols itself
 
 class Square extends React.Component {
 	constructor(props) {
@@ -6,6 +7,8 @@ class Square extends React.Component {
 		this.sendRequest = this.sendRequest.bind(this);
 	}
 
+	// sendRequest: Sends a basic request to the flask server
+	// TODO: Make this a generic function that can be used anywhere
 	sendRequest() {
 		let req = new XMLHttpRequest();
 		req.addEventListener("load", () => {
@@ -33,6 +36,7 @@ class Square extends React.Component {
 	}
 }
 
+// The board's rows. This is basically a bunch of Squares
 class BoardRow extends React.Component {
 	constructor(props) {
 		super(props);
@@ -51,19 +55,19 @@ class BoardRow extends React.Component {
 	}
 
 	render() {
-	let row = [];
-	for (let i = 1; i <= 11; i++) {
-		row.push(<Square squareID={i + this.props.rowChar}/>);
-	}
+		let row = [];
+		for (let i = 1; i <= 11; i++) {
+			row.push(<Square squareID={i + this.props.rowChar}/>);
+		}
 
-	return (
-	<tr>
-	{row}
-	</tr>)
-	}
+		return (
+		<tr>
+		{row}
+		</tr>)
+		}
 }
 
-
+// The board. This is just a bunch of BoardRows
 class Board extends React.Component{
 		state = {
 
@@ -86,7 +90,6 @@ class Board extends React.Component{
 		}
 
 		render(){
-			//return(<Square squareID="testid"/>);
 			let boardCharacters = "abcdefghijk";
 			let boardObj = [];
 			for (let i = 0; i < boardCharacters.length; i++) {
