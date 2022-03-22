@@ -22,15 +22,11 @@ Navigate to `Project/Web/squared-web`, then execute `npm start`. This will start
 `Project/Web` is the React frontend of the project.
 
 ## Contact
-Keijaoh Campbell - keijaoh.campbell@maine.edu
-
-Jeffrey Fosgate - jeffrey.fosgate@maine.edu
-
-Jacob Lorenzo - jacob.w.lorenzo@maine.edu
-
-Shea Keegan - shea.keegan@maine.edu
-
-Tyler Walker - tyler.j.walker@maine.edu
+* Keijaoh Campbell (keijaoh.campbell@maine.edu)
+* Jeffrey Fosgate (jeffrey.fosgate@maine.edu)
+* Jacob Lorenzo (jacob.w.lorenzo@maine.edu)
+* Shea Keegan (shea.keegan@maine.edu)
+* Tyler Walker (tyler.j.walker@maine.edu)
 
 ## License
 
