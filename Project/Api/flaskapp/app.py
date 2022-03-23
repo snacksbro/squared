@@ -59,13 +59,21 @@ def GameNext(WaitList, PlayerCount):
 		del WaitList[0]
 	return PlayerList
 
-@app.route('/verifywaitlistcount') # Check if sufficient players are in the queue
+@app.route('/assignplayers') #Assigns colors to player
+def PlayerAssign(PlayerList,PlayerCount):
+	ColorList = ["red", "blue", "yellow", "green"]
+	for i in range(PlayerCount):
+		x = random.randint(0,len(ColorList)-1)
+		PlayerList[i] = PlayerList[i] +","+ ColorList[x]
+		ColorList.remove(ColorList[x])
+	return PlayerList
+
+@app.route('/verifywaitlistcount') # Check if sufficient players are in the queue 
 def VerifyWaitlistCount(WaitList, PlayerCount):
 	if len(WaitList) >= PlayerCount:
 		return 1
 	else:
 		return 0
-
 
 @app.route('/diceroll') # Generates a random 6 sided die roll
 def RandD6():
