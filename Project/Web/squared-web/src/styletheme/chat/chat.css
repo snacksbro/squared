@@ -1,19 +1,52 @@
 /* BODY */
 
-body{
+body {
 	background-color: white;
 	font-family: Verdana, sans-serif;
 }
 
 /* MESSAGE STYLING */
 
-.username{
+.username {
 	text-decoration: underline;
 	font-weight: bold;
 }
-p.player1{
+p.player1 {
 	color: #006600;
 }
-p.player2{
+p.player2 {
 	color: #001999;
+}
+
+/* CHATBOX */
+
+#chatbox {
+	margin: 2px auto 2px auto;
+	grid-area: chatbox;
+}
+#message {
+	grid-area: message;
+}
+#chat-submit {
+	grid-area: chat-submit;
+}
+#chat-area {
+	grid-area: chat;
+	padding: 2px auto 2px auto;
+	/*border: 5px solid green;*/
+	min-height: 100%;
+	grid-template:
+		"chatbox chatbox" 40vh
+		"message chat-submit" 20vh
+		/ 3fr 3fr;
+}
+
+@media (max-width: 1200px) {
+	body {
+		grid-template:
+			"title options options" 20vh
+			"board board board" 100vh
+			"chat chat chat" 60vh
+			/ 4fr 4fr 4fr;
+	}
 }

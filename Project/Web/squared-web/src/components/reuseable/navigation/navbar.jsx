@@ -197,11 +197,20 @@ const NavBar = ({ user, currentProfile }) => {
 								</Link>
 							</li>
 						</ul>
-
 						<div className='others-option'>
 							<div className='d-flex align-items-center'>
 								<div className='option-item'>
-									<Link to='#' className='default-btn'>
+									<Link to='/register' className='default-btn'>
+										Register
+									</Link>
+								</div>
+							</div>
+						</div>
+						&nbsp;
+						<div className='others-option'>
+							<div className='d-flex align-items-center'>
+								<div className='option-item'>
+									<Link to='/login' className='default-btn'>
 										Login
 									</Link>
 								</div>
@@ -257,6 +266,23 @@ const NavBar = ({ user, currentProfile }) => {
 												to='/learngame'
 												className='sub-menu-item'>
 												Learn
+											</ItemLink>
+										</li>
+										<li>
+											<ItemLink
+												onClick={handleClick}
+												to='/register'
+												className='sub-menu-item'>
+												Register
+											</ItemLink>
+										</li>
+
+										<li>
+											<ItemLink
+												onClick={handleClick}
+												to='/login'
+												className='sub-menu-item'>
+												Login
 											</ItemLink>
 										</li>
 									</List>

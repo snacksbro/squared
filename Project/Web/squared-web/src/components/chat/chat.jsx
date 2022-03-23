@@ -1,38 +1,38 @@
-import React, {Component} from 'react'
+import React, { Component } from "react";
 //<link href="../src/chat.css" type="text/css" rel="stylesheet">
-import "../../styletheme/chat/chat.css"
-class Chat extends React.Component{
-    state = {
+import "../../styletheme/chat/chat.css";
+import "../game/styles/scorebar.css";
 
-    }
+const Chat = ({ chatHistoryList }) => {
+	return (
+		<React.Fragment>
+			<div style={{ width: "100%" }}>
+				<ul style={{ listStyleType: "none" }}>
+					{chatHistoryList.map((value, index) => (
+						<React.Fragment>
+							<li key={index}>
+								<p className='player1'>
+									<img
+										src={value.playerImg}
+										style={{
+											width: "2em",
+											height: "2em",
+											align: "center",
+											padding: "1%",
+										}}
+									/>
+									<span className='username'>{value.userName}</span>: <br />
+									<p className='message' style={{ maxWidth: "100%" }}>
+										{value.chatMessage}
+									</p>
+								</p>
+							</li>
+						</React.Fragment>
+					))}
+				</ul>
+			</div>
+		</React.Fragment>
+	);
+};
 
-
-    async componentDidMount(){
-        //called when the page is loaded
-    }
-
-    componentDidMount(){
-        //called immediately after a component is mounted (created)
-
-    }
-
-    componentWillUnmount() {
-         //called immediately before a component is unmounted (destroyed)
-
-
-    }
-
-    render(){
-
-        return(
-            <React.Fragment>
-                {/*Please place your HTML5 within the React.Fragment block  */}
-                <p class="player1"><span class="username">USER</span>: <span class="message">MESSAGE</span></p>
-		        <p class="player2"><span class="username">USER</span>: <span class="message">MESSAGE</span></p>
-            </React.Fragment>
-        )
-    }
-
-}
-
-export default Chat
+export default Chat;

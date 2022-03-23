@@ -1,6 +1,6 @@
 /* GAME TITLE / SQUARED LOGO */
 
-#game-title-area{
+#game-title-area {
 	grid-area: title;
 	text-align: center;
 	vertical-align: middle;
@@ -8,13 +8,13 @@
 	/*border: 5px solid red;*/
 }
 
-/* ENTIRE GAME BOARD */ 
+/* ENTIRE GAME BOARD */
 
-#board-area{
+#board-area {
 	grid-area: board;
 	/*border: 5px solid purple;*/
 }
-#board td{
+#board td {
 	width: 45px;
 	height: 45px;
 	min-width: 50px;
@@ -22,39 +22,40 @@
 	border: 2px solid black;
 	background-color: white;
 }
-#board{
+#board {
 	border-collapse: collapse;
 	margin: 5px auto 5px auto;
 }
 
 /* BOARD SPACES */
 
-#board .red-captured{
-	background-color: #CC0000;
+#board .red-captured {
+	background-color: #cc0000;
 }
-#board .blue-captured{
+#board .blue-captured {
 	background-color: #001999;
 }
-#board .yellow-captured{
-	background-color: #FFFF00;
+#board .yellow-captured {
+	background-color: #ffff00;
 }
-#board .green-captured{
-	background-color: #009900;	
+#board .green-captured {
+	background-color: #009900;
 }
-#board .highlighted{
-	background-color: #CCFFB3;
+#board .highlighted {
+	background-color: #ccffb3;
 }
 
 /* OPTIONS AREA */
 
-#options-area{
+#options-area {
 	/*border: 5px solid blue;*/
 	grid-area: options;
 	display: grid;
-	grid-template:	"options1 options2" 20vh
-			/ 5fr 5fr;
+	grid-template:
+		"options1 options2" 20vh
+		/ 5fr 5fr;
 }
-#options-area ul{
+#options-area ul {
 	list-style-type: none;
 	font-size: 30pt;
 	text-indent: 0px;
@@ -63,60 +64,45 @@
 	margin-top: auto;
 	margin-bottom: auto;
 }
-#home, #play, #leaderboard, #learn{
+#home,
+#play,
+#leaderboard,
+#learn {
 	text-shadow: 4px 4px 6px #777777;
 	color: black;
 	text-decoration: none;
 }
-#home:hover, #home:focus{
+#home:hover,
+#home:focus {
 	color: #940000;
-	text-shadow: 4px 4px 6px #D00000;
+	text-shadow: 4px 4px 6px #d00000;
 }
-#play:hover, #play:focus{
-	color: #00942C;
-	text-shadow: 4px 4px 6px #00AC0B;
+#play:hover,
+#play:focus {
+	color: #00942c;
+	text-shadow: 4px 4px 6px #00ac0b;
 }
-#leaderboard:hover, #leaderboard:focus{
+#leaderboard:hover,
+#leaderboard:focus {
 	color: #859400;
-	text-shadow: 4px 4px 6px #BFD400;
+	text-shadow: 4px 4px 6px #bfd400;
 }
-#learn:hover, #learn:focus{
+#learn:hover,
+#learn:focus {
 	color: #000099;
-	text-shadow: 4px 4px 6px #0023B0;
+	text-shadow: 4px 4px 6px #0023b0;
 }
-#options1{
+#options1 {
 	grid-area: options1;
 }
-#options2{
+#options2 {
 	grid-area: options2;
-}
-
-/* CHATBOX */
-
-#chatbox{
-	margin: 2px auto 2px auto;
-	grid-area: chatbox;
-}
-#message{
-	grid-area: message;
-}
-#chat-submit{
-	grid-area: chat-submit;
-}
-#chat-area{
-	grid-area: chat;
-	padding: 2px auto 2px auto;
-	/*border: 5px solid green;*/
-	display: grid;
-	grid-template:	"chatbox chatbox" 70vh
-			"message chat-submit" 20vh
-			/ 3fr 3fr ;
 }
 
 /* BODY / BACKGROUND */
 /*This doesnt belong here, keep the css styling specific to the component  */
-body{
-/*	background-image: url("../images/squared-background.png");
+body {
+	/*	background-image: url("../images/squared-background.png");
 	background-image-opacity: 0.2;
 	display: grid;
 	grid-template:  "title title options options" 20vh
@@ -126,57 +112,47 @@ body{
 
 /* DYNAMIC UI */
 
-@media(max-width:1200px){
-	body{
-		grid-template: "title options options" 20vh
-				"board board board" 100vh
-				"chat chat chat" 60vh
-				/ 4fr 4fr 4fr; 
-	}
-}
-
 /* NOT YET IMPLEMENTED - TO BE IMPLEMENTED IN A LATER VERSION */
 
-#score-area{
+#score-area {
 	grid-area: scores;
-	background-color: #6D8491;
+	background-color: #6d8491;
 	border-radius: 6px;
 	margin: 2px auto 2px auto;
 	color: white;
 	font-family: monospace;
 	font-size: 30px;
 	font-weight: bold;
-	padding:8px;
-	display:grid;
-	grid-template: "bluescore time greenscore" 100vh
-			/ 4fr 5fr 4fr ;
+	padding: 8px;
+	display: grid;
+	grid-template:
+		"bluescore time greenscore" 100vh
+		/ 4fr 5fr 4fr;
 }
-#blue-score{
+#blue-score {
 	grid-area: bluescore;
 }
-#time{
+#time {
 	grid-area: time;
 	text-align: center;
 	margin: 2px auto 2px auto;
 }
-#green-score{
+#green-score {
 	grid-area: greenscore;
 }
-img.score-player{
+img.score-player {
 	width: 50px;
 	height: 50px;
 	margin: 4px;
 	vertical-align: middle;
 	border: 2px solid black;
 }
-#dice-area{
+#dice-area {
 	grid-area: dice;
 }
 
-.list-style{
-
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-	
+.list-style {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
