@@ -44,6 +44,11 @@ def gameCreate(players): # from lobby we'll queue players
 	}
 gameCreate(["test1", "test2"])
 
+# This is the first thing react calls. This will send the game object
+@app.route('/initialize')
+def initialize():
+	return game[gameID]
+
 @app.route('/diceroll')
 def RandD6():
     return str(random.randint(1,6))
