@@ -9,7 +9,7 @@ class Square extends React.Component {
 		this.sendRequest = this.sendRequest.bind(this);
 		this.setIcon = this.setIcon.bind(this);
 		this.state = {
-			icon: ""
+			icon: Players.red
 		}
 	}
 
@@ -46,7 +46,7 @@ class Square extends React.Component {
 
 	render() {
 		//return <td id={this.props.squareID} onClick={this.sendRequest}><img id="square-icon" src={this.state.icon}/></td>
-		return <td id={this.props.squareID} onClick={this.sendRequest}></td>
+		return <td class="board-square" style={{backgroundImage: `url(${this.state.icon})`}} id={this.props.squareID} onClick={this.sendRequest}></td>
 	}
 }
 

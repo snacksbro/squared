@@ -25,3 +25,7 @@
 	height: inherit;
 }
 
+/* The individual squares on the board */
+.board-square {
+	background-size: 100%;
+}
