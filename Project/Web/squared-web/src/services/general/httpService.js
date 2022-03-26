@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {toast} from 'react-toastify';
+import apiEndpoint from "../../constants/config.json"
 
 //configuring default headers
 

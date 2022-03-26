@@ -20,3 +20,8 @@
 	width: 25%;
 }
 
+#square-icon {
+	width: inherit;
+	height: inherit;
+}
+

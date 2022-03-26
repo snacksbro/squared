@@ -26,7 +26,6 @@ import YellowIcon from "../../images/yellow-player.png";*/
 		// TODO: Add an argument to allow it to take in something like an array of colors/usernames and building accordingly. For now it'll use 2.
 		return (
 			<div id="scorebar">
-
 				<div id="red"><img class="icon" src={RedIcon}/> x {this.props.scores[0]}</div>
 				<div id="blue"><img class="icon" src={BlueIcon}/> x {this.props.scores[1]}</div>
 			</div>

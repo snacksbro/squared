@@ -30,3 +30,4 @@ Navigate to `Project/Web/squared-web`, then execute `npm start`. This will start
 
 ## License
 To be decided next meeting
+
