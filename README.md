@@ -3,6 +3,11 @@
 Squared is an upcoming multiplayer competitive board-game where the objective is to capture as much of the board as possible.
 
 ## Installation
+First, download the repository. You can do this via
+> git pull https://github.com/snacksbro/squared.git
+
+Or alternatively just download the [.zip](https://github.com/snacksbro/squared/archive/refs/heads/master.zip)
+
 Obtain a copy of [Python3](https://www.python.org/downloads/), [Pip3](https://pip.pypa.io/en/stable/installation/), and then execute:
 > pip3 install flask
 
