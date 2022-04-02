@@ -55,6 +55,25 @@ def LeaveWaitlist(WaitList, PlayerName):
 
 gameCreate(["test1", "test2"])
 
+class Message:
+    def __init__(self, body, userID, username):
+        self.body = body
+        self.userID = userID
+        self.username = username
+
+    def censor_msg(self):	# Method to censor chat messages
+        badWords = ["shit", "pussy"]
+        censoredBody = []
+        print(self.body)
+        msgBody = self.body
+        msgBody = msgBody.split(" ")
+        for word in msgBody:
+            if word in badWords:
+                censoredBody.append(len(word) * "*")
+            else:
+                censoredBody.append(word)
+        print(" ".join(censoredBody))
+
 # This is the first thing react calls. This will send the game object
 @app.route('/initialize')
 def initialize():
