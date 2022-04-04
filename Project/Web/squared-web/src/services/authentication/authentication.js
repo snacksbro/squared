@@ -1,6 +1,4 @@
 //Author: Keijaoh
 //TODO: will contain login, register and token management here
-
-import endPoint from '../../constants/config.json'
-
-
+//Version: 1.0
+import endPoint from "../../constants/config.json";
