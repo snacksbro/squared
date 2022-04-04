@@ -18,9 +18,13 @@ To update flask
 
 You will need to install the following additional python3 libraries
 > pip3 install pymongo 
+> 
 > pip3 install passlib
+> 
 > pip3 install "pymongo[srv]"
+> 
 > pip3 install rsa
+> 
 > pip3 install pandas
 
 To set the Python environment to development and enable Hot-Reload, run the following command in the terminal
