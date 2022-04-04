@@ -1,13 +1,55 @@
+'''
+Notes
+#install required libraries
+#pip install flask pymongo passlib
+update flask ->  pip install -U Flask
+needed to run mongo db
+pip install "pymongo[srv]"
+
+Set to development mode
+export FLASK_ENV=development
+
+Install RSA
+ pip install rsa
+
+Install Pandas
+ pip install pandas
+
+
+
+'''
+import json
+import json
+from bson import json_util
+
 from flask import Flask
 from flask import jsonify
 from flask import request
 from flask_cors import CORS
 import random
 
+#used for encryption and decryption
+import rsa
+
+#setting up the mongodb
+from pymongo import MongoClient
+from pandas import DataFrame
+
+cluster = MongoClient("mongodb+srv://USERNAME:PASSSWORD@squaredtestcluster.g2hsl.mongodb.net")
+
+
+
+
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}}) # Basically let React send requests
 
+
 game = [None] * 99999
+
+#debug mode
+if __name__ == "__main__":
+    app.run(debug=True)
+
 '''
 game = [
 		{"players": ["user1", "user2"], # Each player
@@ -54,6 +96,25 @@ def LeaveWaitlist(WaitList, PlayerName):
 	return WaitList
 
 gameCreate(["test1", "test2"])
+
+class Message:
+    def __init__(self, body, userID, username):
+        self.body = body
+        self.userID = userID
+        self.username = username
+
+    def censor_msg(self):	# Method to censor chat messages
+        badWords = ["shit", "pussy"]
+        censoredBody = []
+        print(self.body)
+        msgBody = self.body
+        msgBody = msgBody.split(" ")
+        for word in msgBody:
+            if word in badWords:
+                censoredBody.append(len(word) * "*")
+            else:
+                censoredBody.append(word)
+        print(" ".join(censoredBody))
 
 # This is the first thing react calls. This will send the game object
 @app.route('/initialize')
@@ -154,9 +215,106 @@ def VerifyTile():
 			return str(3)
 	return str(-1)
 
-@app.route('/login_user')
+
+'''
+fetch the params and process the request
+validate the params using joi
+'''
+@app.route('/login_user',methods=['POST'])
 def login_user():
-    '''
-    fetch the params and process the request
-    validate the params using joi
-    '''
+	if request.is_json:
+		email_address = request.json['emailAddress']
+		password = request.json['password']
+	else:
+		email_address = request.args['emailAddress']
+		password = request.args['password']
+
+	# referencing the database
+	db = cluster["SquaredDev"]  # database name
+	collection = db["user"]
+
+	result = collection.find_one
+	({"emailAddress": email_address,
+	  })
+
+	#TODO need to set a check if empty, not working right now
+
+	#TODO add JWT after
+	print(result)
+	if not result:
+		print("No Results was found")
+
+	else:
+		print(result)
+	#doc = result
+	#json_list = json.dumps(doc, default=json_util.default)
+
+	return str("result")
+
+
+
+
+@app.route('/register_user', methods=['POST'])
+def register_new_user():
+	if request.is_json:
+		firstName = request.json['firstName']
+		lastName = request.json['lastName']
+		emailAddress = request.json['emailAddress']
+		password = request.json['password']
+	else:
+		firstName = request.args['firstName']
+		lastName = request.args['lastName']
+		emailAddress = request.args['emailAddress']
+		password = request.args['password']
+
+	db = cluster["SquaredDev"]  # database name
+	collection = db["user"]
+	print(emailAddress)
+	already_exist = collection.find_one
+	({"emailAddress": emailAddress})
+
+	print(already_exist)
+	if already_exist:
+		#email not unique
+		return jsonify(message='This email already exists'), 409
+	else:
+		#add the decryption somewhere else
+		public_key, private_key = rsa.newkeys(716)
+		enc_password = rsa.encrypt(password.encode(),
+								 public_key)
+
+		body = {
+			#"_id": 1,
+			"firstName": firstName,
+			"lastName": lastName,
+			"emailAddress": emailAddress,
+			"password": enc_password
+		}
+
+		collection.insert_one(body)
+		#return success message and success code
+		return jsonify(message ="User created successfully."), 201
+
+#gets only GET
+@app.route('/find_user_by_name',methods=['GET'])
+def find_user_profile():
+
+
+	# get the parameters or json
+	# get data as json
+	if request.is_json:
+		firstName = request.json['firstName']
+	else:
+		firstName = request.args['firstName']
+
+
+	db = cluster["SquaredDev"]  # database name
+	collection = db["user"]
+
+	results = collection.find({"firstName": firstName})
+
+	#convert curson to json list
+	docs_list = list(results)
+	json_list = json.dumps(docs_list, default=json_util.default)
+
+	return json_list

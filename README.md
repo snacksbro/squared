@@ -13,6 +13,23 @@ Obtain a copy of [Python3](https://www.python.org/downloads/), [Pip3](https://pi
 
 > pip3 install flask_cors
 
+To update flask
+> pip3 install -U Flask
+
+You will need to install the following additional python3 libraries
+> pip3 install pymongo 
+> 
+> pip3 install passlib
+> 
+> pip3 install "pymongo[srv]"
+> 
+> pip3 install rsa
+> 
+> pip3 install pandas
+
+To set the Python environment to development and enable Hot-Reload, run the following command in the terminal
+> export FLASK_ENV=development
+
 You'll also need [Node.js](https://nodejs.org/en/download/). Install the requirements after with:
 > npm install
 
