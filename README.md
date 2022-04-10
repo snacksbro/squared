@@ -9,29 +9,15 @@ First, download the repository. You can do this via
 Or alternatively just download the [.zip](https://github.com/snacksbro/squared/archive/refs/heads/master.zip)
 
 Obtain a copy of [Python3](https://www.python.org/downloads/), [Pip3](https://pip.pypa.io/en/stable/installation/), and then execute:
-> pip3 install flask
-
-> pip3 install flask_cors
-
-To update flask
-> pip3 install -U Flask
-
-You will need to install the following additional python3 libraries
-> pip3 install pymongo 
-> 
-> pip3 install passlib
-> 
-> pip3 install "pymongo[srv]"
-> 
-> pip3 install rsa
-> 
-> pip3 install pandas
+> pip3 install -r requirements.txt
+While in the `/Project/Api/flaskapp` directory.
 
 To set the Python environment to development and enable Hot-Reload, run the following command in the terminal
 > export FLASK_ENV=development
 
 You'll also need [Node.js](https://nodejs.org/en/download/). Install the requirements after with:
 > npm install
+While in the `/Project/Web/squared-web` directory.
 
 ## Running Locally
 In `Project/Api/flaskapp`, simply execute `flask run`. This will run the API server on `http://localhost:5000`.
