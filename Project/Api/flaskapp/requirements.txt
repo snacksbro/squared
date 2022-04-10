@@ -1,6 +1,7 @@
 Flask==2.1.1
 Flask_Cors==3.0.10
 pandas==1.4.2
+passlib==1.7.4
 pip==20.0.2
-pymongo==4.1.0
+pymongo[srv]==4.1.0
 rsa==4.8
