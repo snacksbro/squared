@@ -25,7 +25,7 @@ class Square extends React.Component {
 		if (this.props.boardData.turn != undefined) {
 			for (let i = 0; i < this.props.boardData.positions.length; i++) {
 				if (this.props.squareID == this.props.boardData.positions[i]) {
-					this.setIcon(Players.blue);
+					this.setIcon(Players[this.props.boardData.playerColors[i]]);
 				}
 			}
 		}
