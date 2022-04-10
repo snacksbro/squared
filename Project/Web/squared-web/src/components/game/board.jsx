@@ -8,15 +8,27 @@ class Square extends React.Component {
 		super(props);
 		this.sendRequest = this.sendRequest.bind(this);
 		this.setIcon = this.setIcon.bind(this);
+		this.updateScores = this.updateScores.bind(this);
 		this.state = {
-			icon: Players.red
+			icon: ""
 		}
+		setInterval(this.updateScores, 3000);
 	}
 
 	setIcon(icon) {
 		this.setState({
 			icon: icon
 		});
+	}
+
+	updateScores() {
+		if (this.props.boardData.turn != undefined) {
+			for (let i = 0; i < this.props.boardData.positions.length; i++) {
+				if (this.props.squareID == this.props.boardData.positions[i]) {
+					this.setIcon(Players.blue);
+				}
+			}
+		}
 	}
 
 	// sendRequest: Sends a basic request to the flask server
@@ -35,7 +47,7 @@ class Square extends React.Component {
 		*/
 	}
 
-	async componentDidMount() {
+	componentDidMount() {
 		//called when the page is loaded
 		//this.setIcon(Players.red);
 	}
@@ -44,7 +56,9 @@ class Square extends React.Component {
 		//called immediately before a component is unmounted (destroyed)
 	}
 
+	// TODO: Get state of board, send state to whichever squares need it
 	render() {
+		// React's async nature is REALLY annoying when dealing with stuff like this. So basically I have to error check it to make sure it's "speedy fast woohoo" nature doesn't stick the component in WITHOUT the props it needs to run. Seriously what the hell? Give me a "hey this request needs to happen before you go sonic on me" option. Or maybe there is one but the docs are so terrible I couldn't find it.
 		//return <td id={this.props.squareID} onClick={this.sendRequest}><img id="square-icon" src={this.state.icon}/></td>
 		return <td class="board-square" style={{backgroundImage: `url(${this.state.icon})`}} id={this.props.squareID} onClick={this.sendRequest}></td>
 	}
@@ -67,7 +81,7 @@ class BoardRow extends React.Component {
 	render() {
 		let row = [];
 		for (let i = 1; i <= 11; i++) {
-			row.push(<Square squareID={i + this.props.rowChar}/>);
+			row.push(<Square boardData={this.props.boardData} squareID={i + this.props.rowChar}/>);
 		}
 
 		return (
@@ -86,7 +100,7 @@ class Board extends React.Component{
 			}
 		}
 
-		async componentDidMount(){
+		componentDidMount(){
 			// query boardsize
 			// query players/colors
 			// query locations
@@ -109,7 +123,7 @@ class Board extends React.Component{
 			let boardCharacters = "abcdefghijk";
 			let boardObj = [];
 			for (let i = 0; i < boardCharacters.length; i++) {
-				boardObj.push(<BoardRow rowChar={boardCharacters[i]}/>);
+				boardObj.push(<BoardRow boardData={this.state.game} rowChar={boardCharacters[i]}/>);
 			}
 
 			return(<div id="board-area"><table id="board">{boardObj}</table></div>);
