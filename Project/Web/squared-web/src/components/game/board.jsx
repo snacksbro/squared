@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import http from '../../services/general/httpService.js'
 import Players from './players.js'
 
+const updateInterval = 1000; // How often the board refreshes itself in ms
 // Essentially, this is everything that makes up the board rows/cols itself
 class Square extends React.Component {
 	constructor(props) {
@@ -12,7 +13,7 @@ class Square extends React.Component {
 		this.state = {
 			icon: ""
 		}
-		setInterval(this.updateScores, 3000);
+		setInterval(this.updateScores, updateInterval);
 	}
 
 	setIcon(icon) {
@@ -26,8 +27,10 @@ class Square extends React.Component {
 			for (let i = 0; i < this.props.boardData.positions.length; i++) {
 				if (this.props.squareID == this.props.boardData.positions[i]) {
 					this.setIcon(Players[this.props.boardData.playerColors[i]]);
+					return;
 				}
 			}
+			this.setIcon(" ");
 		}
 	}
 
@@ -35,7 +38,7 @@ class Square extends React.Component {
 	sendRequest() {
 		http.get("http://127.0.0.1:5000/verify?square=" + this.props.squareID)
 			.then(function(res) {
-				alert(res.data);
+				//alert(res.data);
 		});
 		/* Old implementation
 		let req = new XMLHttpRequest();
@@ -98,9 +101,11 @@ class Board extends React.Component{
 			this.state = {
 				game: ""
 			}
+			this.updateGameState = this.updateGameState.bind(this);
+			setInterval(this.updateGameState, updateInterval);
 		}
 
-		componentDidMount(){
+		updateGameState() {
 			// query boardsize
 			// query players/colors
 			// query locations
@@ -111,6 +116,10 @@ class Board extends React.Component{
 						game: res.data
 					});
 			}.bind(this)); // This line is VERY important. Basically it wasn't letting me setState since it couldn't "see" 'this' yet. So I had to manually bind it so it could access this.setState. Similar to in other constructors (like Square's) where you have to bind functions to this.
+		}
+
+		componentDidMount(){
+			this.updateGameState();
 		}
 
 		componentWillUnmount() {

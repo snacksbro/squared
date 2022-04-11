@@ -206,6 +206,9 @@ def VerifyTile():
 
 	if (isAdjacent(position, target)):
 		if "none" in StringParser(TileString):
+			currentPlayerIndex = game[gameID]["players"].index(game[gameID]["turn"])
+			print(request.args.get("square")+ " set")
+			game[gameID]["positions"][currentPlayerIndex] = request.args.get("square")
 			return str(0)
 		elif "trap" in StringParser(TileString):
 			return str(1)
@@ -250,9 +253,6 @@ def login_user():
 	#json_list = json.dumps(doc, default=json_util.default)
 
 	return str("result")
-
-
-
 
 @app.route('/register_user', methods=['POST'])
 def register_new_user():
