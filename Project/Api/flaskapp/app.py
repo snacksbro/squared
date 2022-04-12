@@ -70,16 +70,16 @@ def gameCreate(players): # from lobby we'll queue players
 	# later we'll let them choose their color
 	# Generate the board
 	board = []
-	for x in range(10):
+	for x in range(11):
 		row = []
-		for y in range(10):
+		for y in range(11):
 			row.append("none")
 		board.append(row)
 
 	game[gameID] = {
 			"players": ["test1", "test2"],
 			"playerColors": ["red", "blue"],
-			"positions": ["1a", "10k"],
+			"positions": ["8a", "10k"],
 			"board": board,
 			"turn": "test1",
 			"roll": 0
@@ -192,10 +192,18 @@ def isAdjacent(coord1, coord2):
 	return False
 
 # translateSquare: Takes in a square ("a2" for example) and returns an index ([0, 2] for example)
-# TODO: Need a case for double-digit numbers
 def translateSquare(square):
 	alphabet = "abcdefghijk"
-	return [int(square[0]), alphabet.index(square[1])]
+	xpos = square[0]
+	ypos = square[1]
+	if (len(square) > 2):
+		# Case for double-digit numbers
+		xpos = xpos + square[1]
+		ypos = square[2]
+	# TODO: Make something like this into a test later
+	#print("GOT " + square)
+	#print("SENT " +str([int(xpos), alphabet.index(ypos)]))
+	return [int(xpos), alphabet.index(ypos)]
 
 @app.route('/verify')
 def VerifyTile():
@@ -207,7 +215,6 @@ def VerifyTile():
 	if (isAdjacent(position, target)):
 		if "none" in StringParser(TileString):
 			currentPlayerIndex = game[gameID]["players"].index(game[gameID]["turn"])
-			print(request.args.get("square")+ " set")
 			game[gameID]["positions"][currentPlayerIndex] = request.args.get("square")
 			return str(0)
 		elif "trap" in StringParser(TileString):
