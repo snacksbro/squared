@@ -31,6 +31,9 @@ Navigate to `Project/Web/squared-web`, then execute `npm start`. This will start
 `Project/Api` is the Flask backend of the project.
 `Project/Web` is the React frontend of the project.
 
+## Issues
+When getting any sort of unexpected behavior, you may want to report it as a bug in the Issue Tracker. Refer to ISSUES.md for a template on creating one of these. This is so we, the developers, can get an idea of where/how the problem is occurring so we can quickly fix it, as well as to be aware if a new version of some of the software we use is causing it.
+
 ## Contact
 * Keijaoh Campbell (keijaoh.campbell@maine.edu)
 * Jeffrey Fosgate (jeffrey.fosgate@maine.edu)
