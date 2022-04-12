@@ -215,7 +215,11 @@ def VerifyTile():
 	if (isAdjacent(position, target)):
 		if "none" in StringParser(TileString):
 			currentPlayerIndex = game[gameID]["players"].index(game[gameID]["turn"])
+			# Setting their old tile as claimed
+			game[gameID]["board"][position[0]][position[1]] = game[gameID]["playerColors"][currentPlayerIndex]
+			# Moving the player if it's valid
 			game[gameID]["positions"][currentPlayerIndex] = request.args.get("square")
+
 			return str(0)
 		elif "trap" in StringParser(TileString):
 			return str(1)

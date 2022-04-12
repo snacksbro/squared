@@ -25,6 +25,7 @@ class Square extends React.Component {
 	updateScores() {
 		if (this.props.boardData.turn != undefined) {
 			for (let i = 0; i < this.props.boardData.positions.length; i++) {
+				// If a player is in the position, set their icon
 				if (this.props.squareID == this.props.boardData.positions[i]) {
 					this.setIcon(Players[this.props.boardData.playerColors[i]]);
 					return;
@@ -63,7 +64,8 @@ class Square extends React.Component {
 	render() {
 		// React's async nature is REALLY annoying when dealing with stuff like this. So basically I have to error check it to make sure it's "speedy fast woohoo" nature doesn't stick the component in WITHOUT the props it needs to run. Seriously what the hell? Give me a "hey this request needs to happen before you go sonic on me" option. Or maybe there is one but the docs are so terrible I couldn't find it.
 		//return <td id={this.props.squareID} onClick={this.sendRequest}><img id="square-icon" src={this.state.icon}/></td>
-		return <td class="board-square" style={{backgroundImage: `url(${this.state.icon})`}} id={this.props.squareID} onClick={this.sendRequest}></td>
+		console.log(this.props.claim)
+		return <td className={this.props.claim + "-captured board-square"} style={{backgroundImage: `url(${this.state.icon})`}} id={this.props.squareID} onClick={this.sendRequest}></td>
 	}
 }
 
@@ -83,8 +85,10 @@ class BoardRow extends React.Component {
 
 	render() {
 		let row = [];
+		let alphabet = "abcdefghijk";
+
 		for (let i = 0; i <= 10; i++) {
-			row.push(<Square boardData={this.props.boardData} squareID={i + this.props.rowChar}/>);
+			row.push(<Square claim={this.props.boardData.board?.[i][alphabet.indexOf(this.props.rowChar)]} boardData={this.props.boardData} squareID={i + this.props.rowChar}/>);
 		}
 
 		return (
