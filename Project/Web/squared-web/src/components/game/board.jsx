@@ -83,7 +83,7 @@ class BoardRow extends React.Component {
 
 	render() {
 		let row = [];
-		for (let i = 1; i <= 11; i++) {
+		for (let i = 0; i <= 10; i++) {
 			row.push(<Square boardData={this.props.boardData} squareID={i + this.props.rowChar}/>);
 		}
 
