@@ -64,7 +64,6 @@ class Square extends React.Component {
 	render() {
 		// React's async nature is REALLY annoying when dealing with stuff like this. So basically I have to error check it to make sure it's "speedy fast woohoo" nature doesn't stick the component in WITHOUT the props it needs to run. Seriously what the hell? Give me a "hey this request needs to happen before you go sonic on me" option. Or maybe there is one but the docs are so terrible I couldn't find it.
 		//return <td id={this.props.squareID} onClick={this.sendRequest}><img id="square-icon" src={this.state.icon}/></td>
-		console.log(this.props.claim)
 		return <td className={this.props.claim + "-captured board-square"} style={{backgroundImage: `url(${this.state.icon})`}} id={this.props.squareID} onClick={this.sendRequest}></td>
 	}
 }
@@ -105,25 +104,9 @@ class Board extends React.Component{
 			this.state = {
 				game: ""
 			}
-			this.updateGameState = this.updateGameState.bind(this);
-			setInterval(this.updateGameState, updateInterval);
-		}
-
-		updateGameState() {
-			// query boardsize
-			// query players/colors
-			// query locations
-			// query status (locations/turn) (every 3 seconds??)
-			http.get("http://127.0.0.1:5000/initialize")
-				.then(function(res) {
-					this.setState({
-						game: res.data
-					});
-			}.bind(this)); // This line is VERY important. Basically it wasn't letting me setState since it couldn't "see" 'this' yet. So I had to manually bind it so it could access this.setState. Similar to in other constructors (like Square's) where you have to bind functions to this.
 		}
 
 		componentDidMount(){
-			this.updateGameState();
 		}
 
 		componentWillUnmount() {
@@ -136,7 +119,9 @@ class Board extends React.Component{
 			let boardCharacters = "abcdefghijk";
 			let boardObj = [];
 			for (let i = 0; i < boardCharacters.length; i++) {
-				boardObj.push(<BoardRow boardData={this.state.game} rowChar={boardCharacters[i]}/>);
+				if (this.props.game != undefined) {
+				boardObj.push(<BoardRow boardData={this.props.game} rowChar={boardCharacters[i]}/>);
+				}
 			}
 
 			return(<div id="board-area"><table id="board">{boardObj}</table></div>);
