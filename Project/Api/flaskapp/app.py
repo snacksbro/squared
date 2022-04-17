@@ -32,14 +32,18 @@ import random
 #setting up the mongodb
 from pymongo import MongoClient
 
-
+#importing local classes
 from controller.authentication.authentication import login_handler, register_user
 from controller.chat.messagefilter import msg_is_clean
 from controller.chat.chatmanager import store_chat_message
 from controller.users.usermanagment import find_user_by_first_name
+from controller.validation.gamevalidation import is_adjacent
+from controller.help.helper import string_parser, translate_square
+from controller.game.gameplay import assign_players, random_list_generator
+
 import constant.constant as constant
 
-from controller.authentication.authentication import Authentication
+
 
 cluster = MongoClient(constant.SERVERURL)
 
@@ -123,12 +127,7 @@ def GameNext(WaitList, PlayerCount):
 
 @app.route('/assignplayers') #Assigns colors to player
 def PlayerAssign(PlayerList,PlayerCount):
-	ColorList = ["red", "blue", "yellow", "green"]
-	for i in range(PlayerCount):
-		x = random.randint(0,len(ColorList)-1)
-		PlayerList[i] = PlayerList[i] +","+ ColorList[x]
-		ColorList.remove(ColorList[x])
-	return PlayerList
+	return assign_players(player_list=PlayerList,player_count= PlayerCount)
 
 @app.route('/verifywaitlistcount') # Check if sufficient players are in the queue 
 def VerifyWaitlistCount(WaitList, PlayerCount):
@@ -143,14 +142,8 @@ def RandD6():
 
 @app.route('/itemlist') # Generates a list of items from a given list
 def RandListGen(RandomList, ItemCount):
-    ItemList = []
 
-    for i in range(ItemCount):
-        ListInteger = random.randint(0, len(RandomList)-1)
-        ItemList.append(RandomList[ListInteger])
-        RandomList.remove(RandomList[ListInteger])
-    ItemList.sort()
-    return jsonify(ItemList)
+    return random_list_generator(random_list= RandomList,item_count=ItemCount)
 
 @app.route('/')
 def index():
@@ -158,59 +151,24 @@ def index():
 
     return '<h1>Squared</h1>'
 
-def StringParser(StringToBeParsed): # Parses string for verification
-	ParsedList = StringToBeParsed.split(",")
-	return ParsedList
-
-# isAdjacent: Returns true if squares are adjacent on the board, false otherwise
-def isAdjacent(coord1, coord2):
-	# Making a list of every adjacent square
-	possibilities = [
-		[coord1[0]+1, coord1[1]], # right
-		[coord1[0], coord1[1]+1], # down
-		[coord1[0]-1, coord1[1]], # left
-		[coord1[0], coord1[1]-1], # up
-	]
-	
-	# Checking if any of them "hit" coord2
-	for possibility in possibilities:
-		# If so, return True
-		if possibility[0] == coord2[0] and possibility[1] == coord2[1]:
-			return True
-	# If not, return False
-	return False
-
-# translateSquare: Takes in a square ("a2" for example) and returns an index ([0, 2] for example)
-def translateSquare(square):
-	alphabet = "abcdefghijk"
-	xpos = square[0]
-	ypos = square[1]
-	if (len(square) > 2):
-		# Case for double-digit numbers
-		xpos = xpos + square[1]
-		ypos = square[2]
-	# TODO: Make something like this into a test later
-	#print("GOT " + square)
-	#print("SENT " +str([int(xpos), alphabet.index(ypos)]))
-	return [int(xpos), alphabet.index(ypos)]
 
 @app.route('/verify')
 def VerifyTile():
 	# TODO: Add gameid to this
-	position = translateSquare(game[gameID]["positions"][game[gameID]["players"].index(game[gameID]["turn"])])
-	target = translateSquare(request.args.get("square"))
+	position = translate_square(square=game[gameID]["positions"][game[gameID]["players"].index(game[gameID]["turn"])])
+	target = translate_square(square=request.args.get("square"))
 	TileString = game[gameID]["board"][target[0]][target[1]]
 
-	if (isAdjacent(position, target)):
-		if "none" in StringParser(TileString):
+	if (is_adjacent(coord1= position,coord2= target)):
+		if "none" in string_parser(StringToBeParsed=TileString):
 			currentPlayerIndex = game[gameID]["players"].index(game[gameID]["turn"])
 			game[gameID]["positions"][currentPlayerIndex] = request.args.get("square")
 			return str(0)
-		elif "trap" in StringParser(TileString):
+		elif "trap" in string_parser(StringToBeParsed=TileString):
 			return str(1)
-		elif "red" in StringParser(TileString):
+		elif "red" in string_parser(StringToBeParsed=TileString):
 			return str(2)
-		elif "blue" in StringParser(TileString):
+		elif "blue" in string_parser(StringToBeParsed=TileString):
 			return str(3)
 	return str(-1)
 
@@ -254,6 +212,7 @@ def register_new_user():
 	#return success message and success code
 	return result
 
+
 #gets only GET
 @app.route('/find_user_by_name',methods=['GET'])
 def find_user_profile():
@@ -274,13 +233,27 @@ def find_user_profile():
 
 #Chat Section
 
+@app.route('/save_user_message',methods=['POST'])
 def save_chat_message():
 	#filter message if pass the test then save it
 	#body, userID, username
-	chat_result = msg_is_clean(body= "Test Message",userID = "12424", username = "Avenger")
+	if request.is_json:
+		body = request.json['body']
+		userID = request.json['userID']
+		username = request.json['username']
+	else:
+		body = request.args['body']
+		userID = request.args['userID']
+		username = request.args['username']
+
+	#filtering the message if it is clean
+	chat_result = msg_is_clean(body=body,userID=userID, username=username)
 
 	if chat_result == True:
 		print("Message is Clean proceed to saving message")
-		store_chat_message(body= "Test Message",userID = "12424", username = "Avenger")
+		result = store_chat_message(body=body,user_id=userID, username=username)
+		return result
 	else:
 		print("Message unclean dont accept the message")
+
+		return "Message unclean dont accept the message"

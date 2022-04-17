@@ -5,11 +5,11 @@ class MessageFilter:
         self.userID = userID
         self.username = username
 
-def msg_is_clean(self, body, userID, username):	# Method to censor chat messages
+def msg_is_clean( body, userID, username):	# Method to censor chat messages
     badWords = ["shit", "pussy"]
     censoredBody = []
-    print(self.body)
-    msgBody = self.body
+    print(body)
+    msgBody = body
     msgBody = msgBody.split(" ")
     for word in msgBody:
         if word in badWords:

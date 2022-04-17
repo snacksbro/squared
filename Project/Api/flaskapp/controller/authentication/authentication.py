@@ -35,6 +35,7 @@ def login_handler(email_address, password):
             if decrypted_password == password:
 
                 #should send back token and sucess message
+                #TODO should return usertoken and add JWT
                 return user["emailAddress"]
             else:
                 return "Invalid Password"
@@ -75,4 +76,5 @@ def register_user(firstName, lastName, emailAddress, password):
 
         collection.insert_one(body)
     #return success message and success code
+    #TODO should return usertoken and add JWT
     return jsonify(message ="User created successfully."), 201
