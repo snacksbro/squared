@@ -15,12 +15,11 @@ Install RSA
 Install Pandas
  pip install pandas
 
-
+Fix for the Eslint jest/globals environment key unknown
+ npm i --save-dev eslint-plugin-jest
 
 '''
-import json
-import json
-from bson import json_util
+
 
 from flask import Flask
 from flask import jsonify
@@ -28,15 +27,21 @@ from flask import request
 from flask_cors import CORS
 import random
 
-#used for encryption and decryption
-import rsa
+
 
 #setting up the mongodb
 from pymongo import MongoClient
-from pandas import DataFrame
 
-cluster = MongoClient("mongodb+srv://USERNAME:PASSSWORD@squaredtestcluster.g2hsl.mongodb.net")
 
+from controller.authentication.authentication import login_handler, register_user
+from controller.chat.messagefilter import msg_is_clean
+from controller.chat.chatmanager import store_chat_message
+from controller.users.usermanagment import find_user_by_first_name
+import constant.constant as constant
+
+from controller.authentication.authentication import Authentication
+
+cluster = MongoClient(constant.SERVERURL)
 
 
 
@@ -63,6 +68,7 @@ game = [
 '''
 # TODO: Add a /queue route. Players who join the game will go there, once there's 4, add them to a game
 runningGames = []
+WaitList =  [] # Queue initialization
 
 # Yolo, I'll fix this later. I'm putting this on the outside so it's a global for testing purposes
 gameID = random.randint(1, 99999)
@@ -84,7 +90,7 @@ def gameCreate(players): # from lobby we'll queue players
 			"turn": "test1",
 			"roll": 0
 	}
-WaitList =  [] # Queue initialization
+
 @app.route('/waitlistjoin') # If player wants to join queue
 def WaitlistJoin(WaitList, PlayerName):
 	WaitList.append(PlayerName)
@@ -96,25 +102,6 @@ def LeaveWaitlist(WaitList, PlayerName):
 	return WaitList
 
 gameCreate(["test1", "test2"])
-
-class Message:
-    def __init__(self, body, userID, username):
-        self.body = body
-        self.userID = userID
-        self.username = username
-
-    def censor_msg(self):	# Method to censor chat messages
-        badWords = ["shit", "pussy"]
-        censoredBody = []
-        print(self.body)
-        msgBody = self.body
-        msgBody = msgBody.split(" ")
-        for word in msgBody:
-            if word in badWords:
-                censoredBody.append(len(word) * "*")
-            else:
-                censoredBody.append(word)
-        print(" ".join(censoredBody))
 
 # This is the first thing react calls. This will send the game object
 @app.route('/initialize')
@@ -167,6 +154,8 @@ def RandListGen(RandomList, ItemCount):
 
 @app.route('/')
 def index():
+
+
     return '<h1>Squared</h1>'
 
 def StringParser(StringToBeParsed): # Parses string for verification
@@ -239,27 +228,13 @@ def login_user():
 		email_address = request.args['emailAddress']
 		password = request.args['password']
 
-	# referencing the database
-	db = cluster["SquaredDev"]  # database name
-	collection = db["user"]
+	result = login_handler(email_address= email_address, password= password)
+	print("Result: " + result)
+	#.login_handler(email_address,password)
 
-	result = collection.find_one
-	({"emailAddress": email_address,
-	  })
 
-	#TODO need to set a check if empty, not working right now
 
-	#TODO add JWT after
-	print(result)
-	if not result:
-		print("No Results was found")
-
-	else:
-		print(result)
-	#doc = result
-	#json_list = json.dumps(doc, default=json_util.default)
-
-	return str("result")
+	return result
 
 @app.route('/register_user', methods=['POST'])
 def register_new_user():
@@ -274,37 +249,15 @@ def register_new_user():
 		emailAddress = request.args['emailAddress']
 		password = request.args['password']
 
-	db = cluster["SquaredDev"]  # database name
-	collection = db["user"]
-	print(emailAddress)
-	already_exist = collection.find_one
-	({"emailAddress": emailAddress})
+	result = register_user(firstName= firstName, lastName= lastName, emailAddress= emailAddress, password= password)
 
-	print(already_exist)
-	if already_exist:
-		#email not unique
-		return jsonify(message='This email already exists'), 409
-	else:
-		#add the decryption somewhere else
-		public_key, private_key = rsa.newkeys(716)
-		enc_password = rsa.encrypt(password.encode(),
-								 public_key)
-
-		body = {
-			#"_id": 1,
-			"firstName": firstName,
-			"lastName": lastName,
-			"emailAddress": emailAddress,
-			"password": enc_password
-		}
-
-		collection.insert_one(body)
-		#return success message and success code
-		return jsonify(message ="User created successfully."), 201
+	#return success message and success code
+	return result
 
 #gets only GET
 @app.route('/find_user_by_name',methods=['GET'])
 def find_user_profile():
+
 
 
 	# get the parameters or json
@@ -314,14 +267,20 @@ def find_user_profile():
 	else:
 		firstName = request.args['firstName']
 
+	result = find_user_by_first_name(first_name= firstName)
 
-	db = cluster["SquaredDev"]  # database name
-	collection = db["user"]
+	return result
 
-	results = collection.find({"firstName": firstName})
 
-	#convert curson to json list
-	docs_list = list(results)
-	json_list = json.dumps(docs_list, default=json_util.default)
+#Chat Section
 
-	return json_list
+def save_chat_message():
+	#filter message if pass the test then save it
+	#body, userID, username
+	chat_result = msg_is_clean(body= "Test Message",userID = "12424", username = "Avenger")
+
+	if chat_result == True:
+		print("Message is Clean proceed to saving message")
+		store_chat_message(body= "Test Message",userID = "12424", username = "Avenger")
+	else:
+		print("Message unclean dont accept the message")
