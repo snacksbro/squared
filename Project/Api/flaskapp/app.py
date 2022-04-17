@@ -130,7 +130,7 @@ def PlayerAssign(PlayerList,PlayerCount):
 		ColorList.remove(ColorList[x])
 	return PlayerList
 
-@app.route('/verifywaitlistcount') # Check if sufficient players are in the queue 
+@app.route('/verifywaitlistcount') # Check if sufficient players are in the queue
 def VerifyWaitlistCount(WaitList, PlayerCount):
 	if len(WaitList) >= PlayerCount:
 		return 1
@@ -171,7 +171,7 @@ def isAdjacent(coord1, coord2):
 		[coord1[0]-1, coord1[1]], # left
 		[coord1[0], coord1[1]-1], # up
 	]
-	
+
 	# Checking if any of them "hit" coord2
 	for possibility in possibilities:
 		# If so, return True
@@ -193,26 +193,33 @@ def translateSquare(square):
 	#print("GOT " + square)
 	#print("SENT " +str([int(xpos), alphabet.index(ypos)]))
 	return [int(xpos), alphabet.index(ypos)]
-
+DiceState = -1
 @app.route('/verify')
 def VerifyTile():
-	# TODO: Add gameid to this
-	position = translateSquare(game[gameID]["positions"][game[gameID]["players"].index(game[gameID]["turn"])])
-	target = translateSquare(request.args.get("square"))
-	TileString = game[gameID]["board"][target[0]][target[1]]
+    if(DiceState == -1):
+        DiceState = int(RandD6())
+        # TODO: Add gameid to this
+    position = translateSquare(game[gameID]["positions"][game[gameID]["players"].index(game[gameID]["turn"])])
+    target = translateSquare(request.args.get("square"))
+    TileString = game[gameID]["board"][target[0]][target[1]]
 
-	if (isAdjacent(position, target)):
-		if "none" in StringParser(TileString):
-			currentPlayerIndex = game[gameID]["players"].index(game[gameID]["turn"])
-			game[gameID]["positions"][currentPlayerIndex] = request.args.get("square")
-			return str(0)
-		elif "trap" in StringParser(TileString):
-			return str(1)
-		elif "red" in StringParser(TileString):
-			return str(2)
-		elif "blue" in StringParser(TileString):
-			return str(3)
-	return str(-1)
+    if (isAdjacent(position, target)):
+        if "none" in StringParser(TileString):
+            currentPlayerIndex = game[gameID]["players"].index(game[gameID]["turn"])
+            game[gameID]["positions"][currentPlayerIndex] = request.args.get("square")
+            DiceState = DiceState - 1
+            if(DiceState == 0):
+                DiceState = -1
+                return str(999)
+                #switch players via return
+            return str(0)
+        elif "trap" in StringParser(TileString):
+            return str(1)
+        elif "red" in StringParser(TileString):
+            return str(2)
+        elif "blue" in StringParser(TileString):
+            return str(3)
+        return str(-1)
 
 
 '''
