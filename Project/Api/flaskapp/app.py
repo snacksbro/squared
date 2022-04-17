@@ -129,7 +129,7 @@ def GameNext(WaitList, PlayerCount):
 def PlayerAssign(PlayerList,PlayerCount):
 	return assign_players(player_list=PlayerList,player_count= PlayerCount)
 
-@app.route('/verifywaitlistcount') # Check if sufficient players are in the queue 
+@app.route('/verifywaitlistcount') # Check if sufficient players are in the queue
 def VerifyWaitlistCount(WaitList, PlayerCount):
 	if len(WaitList) >= PlayerCount:
 		return 1
