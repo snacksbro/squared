@@ -20,7 +20,7 @@ Fix for the Eslint jest/globals environment key unknown
 
 '''
 
-
+from ChangeTurn import *
 from flask import Flask
 from flask import jsonify
 from flask import request
@@ -147,13 +147,13 @@ def RandListGen(RandomList, ItemCount):
 
 @app.route('/')
 def index():
-
-
     return '<h1>Squared</h1>'
 
-
+DiceState  = -1
 @app.route('/verify')
 def VerifyTile():
+    if(DiceState == -1):
+        DiceState = int(RandD6())
 	# TODO: Add gameid to this
 	position = translate_square(square=game[gameID]["positions"][game[gameID]["players"].index(game[gameID]["turn"])])
 	target = translate_square(square=request.args.get("square"))
@@ -161,6 +161,9 @@ def VerifyTile():
 
 	if (is_adjacent(coord1= position,coord2= target)):
 		if "none" in string_parser(StringToBeParsed=TileString):
+            if(DiceState == 0):
+                DiceState = -1
+                #Call func to change player
 			currentPlayerIndex = game[gameID]["players"].index(game[gameID]["turn"])
 			game[gameID]["positions"][currentPlayerIndex] = request.args.get("square")
 			return str(0)
