@@ -18,15 +18,21 @@ Install Pandas
 Fix for the Eslint jest/globals environment key unknown
  npm i --save-dev eslint-plugin-jest
 
+Install Jwt for python
+ pip install flask_jwt_extended
+
+ it tells you which modules you've installed with pip install and the versions of these modules that you are currently
+ have installed on your computer.
+ pip freeze
 '''
 
 
 from flask import Flask
 from flask import jsonify
 from flask import request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import random
-
+from flask_jwt_extended import JWTManager, jwt_required, create_access_token
 
 
 #setting up the mongodb
@@ -50,7 +56,17 @@ cluster = MongoClient(constant.SERVERURL)
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}}) # Basically let React send requests
+#cors = CORS(app, resources={r"/*": {"origins": "*"}}) # Basically let React send requests
+cors = CORS(app)
+#app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['Access-Control-Allow-Origin'] = '*'
+
+
+#configuring JWT
+
+app.config['JWT_SECRET_KEY'] = constant.JWT_SECRET_KEY #set your own key
+'''Initializing the JWT (Json Web Token) Manager'''
+jwt = JWTManager(app)
 
 
 game = [None] * 99999
@@ -178,7 +194,11 @@ fetch the params and process the request
 validate the params using joi
 '''
 @app.route('/login_user',methods=['POST'])
+@cross_origin()
+#@cross_origin(origin='localhost',headers=['Content-Type','Authorization','Access-Control-Allow-Origin'])
 def login_user():
+
+
 	if request.is_json:
 		email_address = request.json['emailAddress']
 		password = request.json['password']
@@ -187,14 +207,21 @@ def login_user():
 		password = request.args['password']
 
 	result = login_handler(email_address= email_address, password= password)
-	print("Result: " + result)
+	#print("Result: " + result)
 	#.login_handler(email_address,password)
+	if result == True:
+		# return jwt token
+		token = create_access_token(identity=email_address)
 
+		print("Result: " + token)
+		# return success message and success code
+		return token, 201
+	else:
 
-
-	return result
+		return jsonify(message="Invalid Password or Email."), 409
 
 @app.route('/register_user', methods=['POST'])
+@cross_origin()
 def register_new_user():
 	if request.is_json:
 		firstName = request.json['firstName']
@@ -208,13 +235,19 @@ def register_new_user():
 		password = request.args['password']
 
 	result = register_user(firstName= firstName, lastName= lastName, emailAddress= emailAddress, password= password)
-
-	#return success message and success code
-	return result
+	if result == True:
+		# return jwt token
+		token = create_access_token(identity=emailAddress)
+		#return success message and success code
+		return jsonify(message="Successfully Logged In!", token=token)
+	else:
+		jsonify(message='This email already exists'), 409
 
 
 #gets only GET
+
 @app.route('/find_user_by_name',methods=['GET'])
+@jwt_required()
 def find_user_profile():
 
 

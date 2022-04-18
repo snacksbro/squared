@@ -36,9 +36,9 @@ def login_handler(email_address, password):
 
                 #should send back token and sucess message
                 #TODO should return usertoken and add JWT
-                return user["emailAddress"]
+                return True
             else:
-                return "Invalid Password"
+                return False
 
     # TODO need to set a check if empty, not working right now
 
@@ -59,7 +59,7 @@ def register_user(firstName, lastName, emailAddress, password):
     print(already_exist)
     if already_exist:
         # email not unique
-        return jsonify(message='This email already exists'), 409
+        return False#jsonify(message='This email already exists'), 409
     else:
         # add the decryption somewhere else
         public_key, private_key = rsa.newkeys(716)
@@ -76,5 +76,5 @@ def register_user(firstName, lastName, emailAddress, password):
 
         collection.insert_one(body)
     #return success message and success code
-    #TODO should return usertoken and add JWT
-    return jsonify(message ="User created successfully."), 201
+    #true which means the account created
+    return True

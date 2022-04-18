@@ -11,6 +11,8 @@ import Leaderboard from "./components/game/leaderboard";
 import Learn from "./components/public_pages/learngame";
 import LoginPage from "./components/authentication/login";
 import RegistrationPage from "./components/authentication/registration";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class App extends Component {
 	state = {};
@@ -18,6 +20,7 @@ class App extends Component {
 	render() {
 		return (
 			<React.Fragment>
+				<ToastContainer />
 				<NavBar />
 				<div className='content'>
 					<Switch>

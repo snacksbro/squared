@@ -7,6 +7,12 @@ import shape_2 from "../../styletheme/theme/web/assets/img/shape/2.png";
 import shape_3 from "../../styletheme/theme/web/assets/img/shape/3.svg";
 import shape_4 from "../../styletheme/theme/web/assets/img/shape/4.svg";
 import shape_5 from "../../styletheme/theme/web/assets/img/shape/5.png";
+import {
+	authLoginUser,
+	getCurrentUser,
+} from "../../services/authentication/authentication";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //TODO need to add the Form element
 class LoginPage extends Form {
@@ -20,23 +26,60 @@ class LoginPage extends Form {
 	schema = {
 		password: Joi.string().min(7).required().label("Password"), //use joi in node as well
 		emailAddress: Joi.string().email().required().label("Email Address"),
-		lastName: Joi.string().required().label("Last Name"),
+		//lastName: Joi.string().required().label("Last Name"),
 	};
 
 	async componentDidMount() {
 		//called when the page is loaded
+toast.
+		//set at the top of the screen
+		window.scrollTo(0, 0);
+
 	}
 
-	componentDidMount() {
-		//called immediately after a component is mounted (created)
-	}
-
+	
 	componentWillUnmount() {
 		//called immediately before a component is unmounted (destroyed)
 	}
 	//Need the Sub Form
+	doSubmit = async () => {
+		//login function
+		try {
+			const { data } = this.state;
+			const accountPayLoad = {
+				emailAddress: data.emailAddress,
+				password: data.password,
+			};
+			try {
+				var result = await authLoginUser(accountPayLoad);
+				toast.info(result);
+				//get the current location
+				const { state } = this.props.location;
+
+				//force a reload of the page
+				window.location = state ? state.from.pathname : "/game";
+			} catch (ex) {
+				console.log(ex.response.data.message);
+				toast.error(ex.response.data.message);
+				return;
+			}
+		} catch (ex) {
+			if (
+				(ex.response && ex.response.status === 400) ||
+				ex.response.status === 409
+			) {
+				const errors = { ...this.state.errors };
+				errors.emailAddress = ex.response.data.message;
+				toast.error(ex.response.data.message);
+				//Update the UI
+				this.setState({ errors });
+			}
+		}
+	};
 
 	render() {
+		//if user logged in
+		if (getCurrentUser()) return <Redirect to='/game' />;
 		return (
 			<React.Fragment>
 				{/*Please place your HTML5 within the React.Fragment block  */}
@@ -56,49 +99,35 @@ class LoginPage extends Form {
 						<div className='row align-items-center'>
 							<div className='col-lg-12'>
 								<div className='contact-form'>
-									<form id='contactForm'>
+									<form id='contactForm' onSubmit={this.handleSubmit}>
 										<div className='row'>
 											<div className='col-lg-12 col-md-12'>
-												<div className='form-group'>
-													<input
-														type='email'
-														name='email'
-														id='email'
-														className='form-control'
-														required
-														data-error='Please enter your email'
-														placeholder='Your Email'
-													/>
-													<div className='help-block with-errors'></div>
-												</div>
+												{this.renderTextInputLabel(
+													"emailAddress",
+													"Email Address",
+													"text",
+													"form-control",
+													"Email Address",
+													"label-text",
+													true,
+													"la la-envelope input-icon",
+												)}
+											</div>
+											<div className='col-lg-12 col-md-12'>
+												{this.renderTextInputLabel(
+													"password",
+													"Password",
+													"password",
+													"form-control",
+													"Password",
+													"label-text",
+													true,
+													"la la-envelope input-icon",
+												)}
 											</div>
 
 											<div className='col-lg-12 col-md-12'>
-												<div className='form-group'>
-													<input
-														type='password'
-														name='password'
-														id='password'
-														className='form-control'
-														required
-														data-error='Please enter your password'
-														placeholder='Your Password'
-													/>
-													<div className='help-block with-errors'></div>
-												</div>
-											</div>
-
-											<div className='col-lg-12 col-md-12'>
-												<div className='send-btn'>
-													<button type='submit' className='default-btn'>
-														Login
-														<span></span>
-													</button>
-													<div
-														id='msgSubmit'
-														className='h3 text-center hidden'></div>
-													<div className='clearfix'></div>
-												</div>
+												{this.renderButton("Login", "default-btn")}
 											</div>
 										</div>
 									</form>
