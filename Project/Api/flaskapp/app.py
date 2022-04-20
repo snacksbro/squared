@@ -149,25 +149,26 @@ def index():
     return '<h1>'+game[gameID]["players"][game[gameID]["players"].index(game[gameID]["turn"])+1]+'</h1>'
 
 
-DiceState  = -1
+DiceState  = int(RandD6())
 @app.route('/verify')
 def VerifyTile():
-    if(DiceState == -1):
-        DiceState = int(RandD6())
 	# TODO: Add gameid to this
     position = translate_square(square=game[gameID]["positions"][game[gameID]["players"].index(game[gameID]["turn"])])
     target = translate_square(square=request.args.get("square"))
     TileString = game[gameID]["board"][target[0]][target[1]]
     if (is_adjacent(coord1= position,coord2= target)):
         if "none" in string_parser(StringToBeParsed=TileString):
+            DiceState = DiceState - 1
+            currentPlayerIndex = game[gameID]["players"].index(game[gameID]["turn"])
+            game[gameID]["positions"][currentPlayerIndex] = request.args.get("square")
+
             if(DiceState == 0):
-                DiceState = -1
+                DiceState = int(RandD6())
                 if([game[gameID]["players"].index(game[gameID]["turn"])] == len(game[gameID]["players"])-1):
                     game[gameID]["turn"] = game[gameID]["players"][0]
                     return str(0)
                 game[gameID]["turn"] = game[gameID]["players"][game[gameID]["players"].index(game[gameID]["turn"])+1]
-            currentPlayerIndex = game[gameID]["players"].index(game[gameID]["turn"])
-            game[gameID]["positions"][currentPlayerIndex] = request.args.get("square")
+                
             return str(0)
         elif "trap" in string_parser(StringToBeParsed=TileString):
             return str(1)
