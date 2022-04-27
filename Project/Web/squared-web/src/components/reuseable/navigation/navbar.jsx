@@ -1,6 +1,6 @@
 import React, { Component, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-//import logo from '../../logo/logo@3x.png'
+import logo from "../../../images/squared-logo.png";
 import styled from "styled-components";
 import "../../../index.css";
 
@@ -11,7 +11,7 @@ import {
 	brands,
 } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 
-const NavBar = ({ user, currentProfile }) => {
+const NavBar = ({ user }) => {
 	//On load get the profile info from me
 
 	//On load get the profile info from me
@@ -152,9 +152,12 @@ const NavBar = ({ user, currentProfile }) => {
 			<nav className='navbar navbar-expand-lg navbar-light bg-light'>
 				<div className='container'>
 					<div className='logo'>
-						<a href='index.html'>
+						{/*<a href='index.html'>
 							<h3>Squared</h3>
-						</a>
+	</a>*/}
+						<Link to={"/"}>
+							<img src={logo} style={{ width: "200px" }} />
+						</Link>
 					</div>
 
 					<div className='mobile-nav'>
@@ -196,12 +199,23 @@ const NavBar = ({ user, currentProfile }) => {
 									Learn
 								</Link>
 							</li>
+							<li className='nav-item'>
+								<Link className='nav-link' to='/gamestore'>
+									Store
+								</Link>
+							</li>
+
+							<li className='nav-item'>
+								<Link className='nav-link' to='/ourteam'>
+									Our Team
+								</Link>
+							</li>
 						</ul>
 						<div className='others-option'>
 							<div className='d-flex align-items-center'>
 								<div className='option-item'>
 									<Link to='/register' className='default-btn'>
-										Register
+										Sign Up
 									</Link>
 								</div>
 							</div>
@@ -232,7 +246,7 @@ const NavBar = ({ user, currentProfile }) => {
 
 						<div className='btn-box'>
 							<Navigation clicked={click}>
-								{!user && (
+								{!user.sub && (
 									<List>
 										<li>
 											<ItemLink
@@ -249,6 +263,14 @@ const NavBar = ({ user, currentProfile }) => {
 												to='/game'
 												className='sub-menu-item'>
 												Play Game
+											</ItemLink>
+										</li>
+										<li>
+											<ItemLink
+												onClick={handleClick}
+												to='/gamestore'
+												className='sub-menu-item'>
+												Store
 											</ItemLink>
 										</li>
 										<li>
@@ -271,9 +293,17 @@ const NavBar = ({ user, currentProfile }) => {
 										<li>
 											<ItemLink
 												onClick={handleClick}
+												to='/ourteam'
+												className='sub-menu-item'>
+												Our Team
+											</ItemLink>
+										</li>
+										<li>
+											<ItemLink
+												onClick={handleClick}
 												to='/register'
 												className='sub-menu-item'>
-												Register
+												Sign Up
 											</ItemLink>
 										</li>
 
@@ -287,7 +317,7 @@ const NavBar = ({ user, currentProfile }) => {
 										</li>
 									</List>
 								)}
-								{user && (
+								{user.sub && (
 									<List>
 										<li>
 											<ItemLink
@@ -309,6 +339,14 @@ const NavBar = ({ user, currentProfile }) => {
 										<li>
 											<ItemLink
 												onClick={handleClick}
+												to='/gamestore'
+												className='sub-menu-item'>
+												Store
+											</ItemLink>
+										</li>
+										<li>
+											<ItemLink
+												onClick={handleClick}
 												to='/leaderboard'
 												className='sub-menu-item'>
 												{" "}
@@ -324,10 +362,12 @@ const NavBar = ({ user, currentProfile }) => {
 											</ItemLink>
 										</li>
 										<li>
-											{" "}
-											<Link to='/logout' className='btn btn-danger'>
+											<ItemLink
+												onClick={handleClick}
+												to='/logout'
+												className='sub-menu-item'>
 												Sign Out
-											</Link>
+											</ItemLink>
 										</li>
 									</List>
 								)}

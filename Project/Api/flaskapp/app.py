@@ -42,7 +42,7 @@ from pymongo import MongoClient
 from controller.authentication.authentication import login_handler, register_user
 from controller.chat.messagefilter import msg_is_clean
 from controller.chat.chatmanager import store_chat_message
-from controller.users.usermanagment import find_user_by_first_name
+from controller.users.usermanagment import find_user_by_first_name, find_user_by_email_address
 from controller.validation.gamevalidation import is_adjacent
 from controller.help.helper import string_parser, translate_square
 from controller.game.gameplay import assign_players, random_list_generator
@@ -60,6 +60,8 @@ app = Flask(__name__)
 cors = CORS(app)
 #app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['Access-Control-Allow-Origin'] = '*'
+#token
+#  res.setHeader();
 
 
 #configuring JWT
@@ -248,6 +250,7 @@ def register_new_user():
 
 @app.route('/find_user_by_name',methods=['GET'])
 @jwt_required()
+@cross_origin()
 def find_user_profile():
 
 
@@ -260,6 +263,25 @@ def find_user_profile():
 		firstName = request.args['firstName']
 
 	result = find_user_by_first_name(first_name= firstName)
+
+	return result
+
+@app.route('/find_user_by_email/<emailAddress>',methods=['GET'])
+@jwt_required()
+@cross_origin()
+def find_user_profile_by_email(emailAddress):
+
+
+	'''
+	# get the parameters or json
+	# get data as json
+	if request.is_json:
+		emailAddress = request.json['emailAddress']
+	else:
+		emailAddress = request.args['emailAddress']
+	'''
+	print(emailAddress)
+	result = find_user_by_email_address(email_address= emailAddress)
 
 	return result
 

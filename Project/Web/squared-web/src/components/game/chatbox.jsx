@@ -26,6 +26,54 @@ class ChatBox extends Form {
 				chatMessage:
 					"I am going to extend my lead :) and be the winner of this match. Win in sight!!",
 			},
+			{
+				userName: "Johnny",
+				playerImg:
+					"https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/Squared%2FCharacters%2Fred-player.png?alt=media&token=5135cf25-894c-40bd-b87b-673e35c96c02",
+
+				chatMessage:
+					"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+			},
+			{
+				userName: "Sue",
+				playerImg:
+					"https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/Squared%2FCharacters%2Fgreen-player.png?alt=media&token=a96bc277-7e21-472c-b10e-779bd3ff5230",
+
+				chatMessage:
+					"I am going to extend my lead :) and be the winner of this match. Win in sight!!",
+			},
+			{
+				userName: "Johnny",
+				playerImg:
+					"https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/Squared%2FCharacters%2Fred-player.png?alt=media&token=5135cf25-894c-40bd-b87b-673e35c96c02",
+
+				chatMessage:
+					"Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+			},
+			{
+				userName: "Sue",
+				playerImg:
+					"https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/Squared%2FCharacters%2Fgreen-player.png?alt=media&token=a96bc277-7e21-472c-b10e-779bd3ff5230",
+
+				chatMessage:
+					"I am going to extend my lead :) and be the winner of this match. Win in sight!!",
+			},
+			{
+				userName: "Sue",
+				playerImg:
+					"https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/Squared%2FCharacters%2Fgreen-player.png?alt=media&token=a96bc277-7e21-472c-b10e-779bd3ff5230",
+
+				chatMessage:
+					"I am going to extend my lead :) and be the winner of this match. Win in sight!!",
+			},
+			{
+				userName: "Sue",
+				playerImg:
+					"https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/Squared%2FCharacters%2Fgreen-player.png?alt=media&token=a96bc277-7e21-472c-b10e-779bd3ff5230",
+
+				chatMessage:
+					"I am going to extend my lead :) and be the winner of this match. Win in sight!!",
+			},
 		],
 		data: {
 			chatMessage: "",
@@ -69,10 +117,11 @@ class ChatBox extends Form {
 		const { chatHistoryList } = this.state;
 		return (
 			<React.Fragment>
-				<div id='chat-area' style={{ width: "100%", border: "solid" }}>
-					<Chat chatHistoryList={chatHistoryList} />
+				<div style={{ overflow: "scroll" }}>
+					<div id='chat-area' style={{ width: "100%", height: "450px" }}>
+						<Chat chatHistoryList={chatHistoryList} />
+					</div>
 				</div>
-
 				<form onSubmit={this.handleSubmit} style={{ paddingTop: "1%" }}>
 					<div className='form-group'>
 						{this.renderNoLabelInput(
@@ -86,6 +135,7 @@ class ChatBox extends Form {
 							"la la-envelope input-icon",
 						)}
 					</div>
+
 					<div className='form-group'>
 						{this.renderButton(
 							"Send Message",

@@ -8,6 +8,8 @@ import jwtDecode from "jwt-decode";
 //declaring the constants
 const tokenKey = "squ_token";
 
+http.setJwt(getJwt());
+
 export async function authLoginUser(accountPayLoad) {
 	const fullApiEndpoint = apiEndpoint.apiEndpoint + "/login_user";
 	//emailAddress
@@ -18,8 +20,6 @@ export async function authLoginUser(accountPayLoad) {
 	}); //need to get the response
 
 	localStorage.setItem(tokenKey, token);
-
-	return 
 }
 
 export function getCurrentUser() {
@@ -30,6 +30,12 @@ export function getCurrentUser() {
 	} catch (ex) {
 		return null;
 	}
+}
+
+export function getCurrentUserProfile(emailAddress) {
+	const fullApiEndpoint =
+		apiEndpoint.apiEndpoint + `/find_user_by_email/${emailAddress}`;
+	return http.get(fullApiEndpoint);
 }
 
 export function loginWithJwt(jwt) {

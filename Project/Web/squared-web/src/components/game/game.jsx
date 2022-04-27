@@ -67,7 +67,11 @@ class Game extends React.Component {
 						<Board />
 					</div>
 					<div id='right-view' style={{ paddingRight: "1%" }}>
-						<ChatBox />
+						<section className='team-area pt-100 pb-70'>
+							<div className='container'>
+								<ChatBox />
+							</div>
+						</section>
 					</div>
 				</div>
 			</React.Fragment>

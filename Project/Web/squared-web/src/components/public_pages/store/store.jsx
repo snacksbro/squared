@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class RegistrationPage extends React.Component {
+class Store extends React.Component {
 	state = {};
 
 	async componentDidMount() {
@@ -19,11 +19,11 @@ class RegistrationPage extends React.Component {
 		return (
 			<React.Fragment>
 				{/*Please place your HTML5 within the React.Fragment block  */}
-				<h1>Registration Page</h1>
+				<h1>Store Page</h1>
 				<h3>Feature coming soon</h3>
 			</React.Fragment>
 		);
 	}
 }
 
-export default RegistrationPage;
+export default Store;

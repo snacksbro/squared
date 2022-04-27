@@ -16,8 +16,31 @@ def find_user_by_first_name(first_name):
 
     results = collection.find({"firstName": first_name})
 
-    # convert cursor to json list
-    docs_list = list(results)
-    json_list = json.dumps(docs_list, default=json_util.default)
+    # convert cursor (extract values from the cursor)
+    for result in list(results):
+        # filtering the results
+        body = {
+            "firstName": result['firstName'],
+            "lastName": result['lastName'],
+            "emailAddress": result['emailAddress']
+        }
+        return body
 
-    return json_list
+
+#find_user_by_email_address
+
+def find_user_by_email_address(email_address):
+    db = cluster["SquaredDev"]  # database name
+    collection = db["user"]
+
+    results = collection.find({"emailAddress": email_address})
+
+    for result in list(results):
+
+        #filtering the results
+        body = {
+            "firstName": result['firstName'],
+            "lastName": result['lastName'],
+            "emailAddress": result['emailAddress']
+        }
+        return body
