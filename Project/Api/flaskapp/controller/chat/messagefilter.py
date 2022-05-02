@@ -6,7 +6,7 @@ class MessageFilter:
         self.username = username
 
 def msg_is_clean( body, userID, username):	# Method to censor chat messages
-    badWords = ["shit", "pussy"]
+    badWords = ["bad", "word"]
     censoredBody = []
     print(body)
     msgBody = body
