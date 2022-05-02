@@ -24,20 +24,18 @@ class LoginPage extends Form {
 		errors: {},
 	};
 	schema = {
-		password: Joi.string().min(7).required().label("Password"), //use joi in node as well
+		password: Joi.string().min(16).required().label("Password"), //use joi in node as well
 		emailAddress: Joi.string().email().required().label("Email Address"),
 		//lastName: Joi.string().required().label("Last Name"),
 	};
 
 	async componentDidMount() {
 		//called when the page is loaded
-toast.
-		//set at the top of the screen
-		window.scrollTo(0, 0);
-
+		toast//set at the top of the screen
+		.window
+			.scrollTo(0, 0);
 	}
 
-	
 	componentWillUnmount() {
 		//called immediately before a component is unmounted (destroyed)
 	}

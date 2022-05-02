@@ -1,0 +1,23 @@
+[
+	{
+		"firstName": "John",
+		"lastName": "Brown",
+		"profileImage": "https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/authorProfilePictures%2FIMG_0037.JPG?alt=media&token=5564320c-10c0-4db6-929d-cccf3dbb76e9",
+		"score": 49,
+		"isTopThree": false
+	},
+	{
+		"firstName": "Jane",
+		"lastName": "Sue",
+		"profileImage": "https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/defaultImages%2FNoImageFound.jpg1_.png?alt=media&token=75d79486-de11-4096-8b7d-d8b1945d71cf",
+		"score": 45,
+		"isTopThree": false
+	},
+	{
+		"firstName": "Sasha",
+		"lastName": "Kay",
+		"profileImage": "https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/defaultImages%2FNoImageFound.jpg1_.png?alt=media&token=75d79486-de11-4096-8b7d-d8b1945d71cf",
+		"score": 40,
+		"isTopThree": false
+	}
+]

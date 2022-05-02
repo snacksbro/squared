@@ -17,7 +17,7 @@ import AboutPlayers from "./about/aboutplayers";
 
 class HomePage extends React.Component {
 	state = {};
-
+	//TODO: Need to host the project at http://squared.keijaoh.com/
 	async componentDidMount() {
 		//called when the page is loaded
 	}

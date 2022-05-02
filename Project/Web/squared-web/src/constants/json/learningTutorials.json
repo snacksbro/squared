@@ -1,0 +1,9 @@
+[
+	{
+		"tutorialTitle": "Basic Rules of Squared",
+
+		"tutorialImageUrl": "https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/Squared%2FStoreAssets%2FRetroGameStreamerartboard-01.png?alt=media&token=e2c88a46-edb5-4794-8bbe-b955825b133c",
+		"tutorialOverview": "SQUARED is played on an 11 by 11 grid board",
+		"tutorialDescription": "SQUARED is played on an 11 by 11 grid board. Players begin on opposite corners of the board and take turns moving based on dice rolls.Players can move in any perpendicular direction depending on the value they roll. If you land on a square, you capture it for yourself! Whoever captures the most spaces by the time all spaces on the board have been captured WINS!"
+	}
+]

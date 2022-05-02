@@ -33,7 +33,7 @@ from flask import request
 from flask_cors import CORS, cross_origin
 import random
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token
-
+from bson.json_util import dumps
 
 #setting up the mongodb
 from pymongo import MongoClient
@@ -46,6 +46,9 @@ from controller.users.usermanagment import find_user_by_first_name, find_user_by
 from controller.validation.gamevalidation import is_adjacent
 from controller.help.helper import string_parser, translate_square
 from controller.game.gameplay import assign_players, random_list_generator
+from controller.game.leaderboard import find_top_three_players, find_other_top_players
+from controller.store_items.storeitemmanagement import find_store_item_by_title,find_all_store_items
+from controller.learningtutorials.learningtutorialmanagment import find_tutorial_by_title, find_all_tutorials
 
 import constant.constant as constant
 
@@ -236,17 +239,21 @@ def register_new_user():
 		emailAddress = request.args['emailAddress']
 		password = request.args['password']
 
+	#print(emailAddress)
 	result = register_user(firstName= firstName, lastName= lastName, emailAddress= emailAddress, password= password)
-	if result == True:
+	if result:
 		# return jwt token
 		token = create_access_token(identity=emailAddress)
-		#return success message and success code
-		return jsonify(message="Successfully Logged In!", token=token)
+		'''return success message and success code'''
+		#return jsonify(message="Successfully Registered", token=token)
+		print(token)
+		return token, 201
 	else:
-		jsonify(message='This email already exists'), 409
+		print('This email already exists')
+		return jsonify(message='This email already exists'), 409
 
 
-#gets only GET
+'''gets only GET'''
 
 @app.route('/find_user_by_name',methods=['GET'])
 @jwt_required()
@@ -265,6 +272,54 @@ def find_user_profile():
 	result = find_user_by_first_name(first_name= firstName)
 
 	return result
+
+@app.route('/find_tutorial_by_title/<tutorialTitle>',methods=['GET'])
+@cross_origin()
+def get_tutorial_by_title(tutorialTitle):
+
+	result = find_tutorial_by_title(tutorial_title= tutorialTitle)
+
+	return dumps(result)
+
+
+@app.route('/find_all_tutorials',methods=['GET'])
+@cross_origin()
+def get_all_tutorials():
+
+	result = find_all_tutorials()
+
+	return dumps(result)
+
+
+#find_all_store_items
+@app.route('/find_all_store_items',methods=['GET'])
+@cross_origin()
+def get_all_store_items():
+
+	result = find_all_store_items()
+
+	return dumps(result)
+
+@app.route('/find_top_three_players',methods=['GET'])
+#@jwt_required()
+@cross_origin()
+def fetch_top_three_players():
+
+	result = find_top_three_players()
+
+	return dumps(result)
+
+
+@app.route('/find_other_top_players',methods=['GET'])
+#@jwt_required()
+@cross_origin()
+def fetch_other_top_players():
+
+	result = find_other_top_players()
+
+	return dumps(result)
+
+
 
 @app.route('/find_user_by_email/<emailAddress>',methods=['GET'])
 @jwt_required()

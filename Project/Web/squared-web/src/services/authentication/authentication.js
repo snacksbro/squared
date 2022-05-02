@@ -22,6 +22,12 @@ export async function authLoginUser(accountPayLoad) {
 	localStorage.setItem(tokenKey, token);
 }
 
+export async function registerUser(accountPayLoad) {
+	const fullApiEndpoint = apiEndpoint.apiEndpoint + "/register_user";
+
+	return http.post(fullApiEndpoint, accountPayLoad); //need to get the response
+}
+
 export function getCurrentUser() {
 	try {
 		//get current user

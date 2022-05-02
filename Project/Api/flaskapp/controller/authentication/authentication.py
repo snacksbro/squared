@@ -4,7 +4,7 @@ from pymongo import MongoClient
 from flask import jsonify
 import constant.constant as constant
 #used for encryption and decryption
-import rsa
+from Crypto.Cipher import AES
 
 class Authentication:
 
@@ -31,7 +31,9 @@ def login_handler(email_address, password):
             print(user)
             #decrypt the password
 
-            decrypted_password = user["password"]
+            decrypted_password =  decrypt(key= constant.ENCRYPT_KEY, ciphertext= user["password"]).decode("utf-8")
+            print("Password")
+            print(str(decrypted_password))
             if decrypted_password == password:
 
                 #should send back token and sucess message
@@ -52,20 +54,19 @@ def login_handler(email_address, password):
 def register_user(firstName, lastName, emailAddress, password):
     db = cluster["SquaredDev"]  # database name
     collection = db["user"]
-    print(emailAddress)
-    already_exist = collection.find_one
-    ({"emailAddress": emailAddress})
+    result = list(collection.find({"emailAddress": str(emailAddress)}).limit(1))
 
-    print(already_exist)
-    if already_exist:
-        # email not unique
-        return False#jsonify(message='This email already exists'), 409
-    else:
+    if len(result) == 0:
+        print("Empty")
+        # so it doesnt exist so create the record
         # add the decryption somewhere else
-        public_key, private_key = rsa.newkeys(716)
-        enc_password = rsa.encrypt(password.encode(),
-                                   public_key)
-
+        #public_key, private_key = rsa.newkeys(716)
+        #enc_password = rsa.encrypt(password.encode(),
+                                   #public_key)
+        print(str(password))
+        enc_password = encrypt(key= constant.ENCRYPT_KEY, plaintext= str(password))
+        #myEncryptedMessage = cryptocode.encrypt("I like trains", "password123")
+        print(enc_password)
         body = {
             # "_id": 1,
             "firstName": firstName,
@@ -75,6 +76,24 @@ def register_user(firstName, lastName, emailAddress, password):
         }
 
         collection.insert_one(body)
-    #return success message and success code
-    #true which means the account created
-    return True
+        print("Successfully registered")
+
+        return True
+    else:
+        print("Not Empty")
+        #already exist so cant be created so abort
+        return False  # jsonify(message='This email already exists'), 409
+
+
+#encryption not for production use
+def encrypt(key, plaintext):
+    obj = AES.new(key, AES.MODE_CBC, constant.ENCRYPT_PHRASE)
+    ciphertext = obj.encrypt(plaintext)
+
+    return ciphertext
+
+def decrypt(key, ciphertext):
+    obj2 = AES.new(key, AES.MODE_CBC,  constant.ENCRYPT_PHRASE)
+    plaintext = obj2.decrypt(ciphertext)
+
+    return plaintext

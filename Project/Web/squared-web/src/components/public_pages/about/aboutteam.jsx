@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { NavLink, Link } from "react-router-dom";
 import shape_1 from "../../../styletheme/theme/web/assets/img/shape/1.png";
 import shape_2 from "../../../styletheme/theme/web/assets/img/shape/2.png";
 import shape_3 from "../../../styletheme/theme/web/assets/img/shape/3.svg";
@@ -12,6 +12,7 @@ class AboutTeam extends Component {
 			{
 				firstName: "Keijaoh",
 				lastName: "Campbell",
+				linkedInProfileUrl: "https://www.linkedin.com/in/keijaoh-campbell/",
 				profileImage:
 					"https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/authorProfilePictures%2FIMG_0037.JPG?alt=media&token=5564320c-10c0-4db6-929d-cccf3dbb76e9",
 				bioInfo:
@@ -20,34 +21,38 @@ class AboutTeam extends Component {
 			{
 				firstName: "Jeffrey",
 				lastName: "Fosgate",
+				linkedInProfileUrl: "#",
 				profileImage:
 					"https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/defaultImages%2FNoImageFound.jpg1_.png?alt=media&token=75d79486-de11-4096-8b7d-d8b1945d71cf",
 				bioInfo:
-					"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+					"Jeffrey is a Computer Science student at the University of Maine. He has interests in front-end web development, game preservation and database management, with a focus on Python programming and scripting.",
 			},
 			{
 				firstName: "Shea",
 				lastName: "Keegan",
+				linkedInProfileUrl: "https://www.linkedin.com/in/shea-keegan-16412b239",
 				profileImage:
-					"https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/defaultImages%2FNoImageFound.jpg1_.png?alt=media&token=75d79486-de11-4096-8b7d-d8b1945d71cf",
+					"https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/Squared%2Fsenior_night_hockey_cropped.jpeg?alt=media&token=bc399d64-373d-4820-8d2f-9aa6a8573940",
 				bioInfo:
-					"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+					"Shea is from Haverhill Massachusetts and a student at UMaine. He has an interest in computers and hopes to learn the ins and outs of software development and computer architecture.",
 			},
 			{
 				firstName: "Jacob",
 				lastName: "Lorenzo",
+				linkedInProfileUrl: "#",
 				profileImage:
-					"https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/defaultImages%2FNoImageFound.jpg1_.png?alt=media&token=75d79486-de11-4096-8b7d-d8b1945d71cf",
+					"https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/Squared%2FIMG_9179.jpg?alt=media&token=ab9976f9-ed83-4157-b269-702ac22f46f9",
 				bioInfo:
-					"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+					"Jacob is from Falmouth, Maine and is a computer science student with a minor in neuroscience at UMaine. He wants to pursue research into artificial intelligence and brain computer interfaces.",
 			},
 			{
 				firstName: "Tyler",
 				lastName: "Walker",
+				linkedInProfileUrl: "#",
 				profileImage:
 					"https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/defaultImages%2FNoImageFound.jpg1_.png?alt=media&token=75d79486-de11-4096-8b7d-d8b1945d71cf",
 				bioInfo:
-					"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+					"Tyler is a student at UMaine and a Computer Science student. He has a life long passion for computers and is excited about learning all about them.",
 			},
 		],
 	};
@@ -101,9 +106,11 @@ class AboutTeam extends Component {
 													</a>
 												</li>
 												<li>
-													<a href='#' target='_blank'>
+													<Link
+														to={{ pathname: value.linkedInProfileUrl }}
+														target='_blank'>
 														<i className='fab fa-linkedin-in'></i>
-													</a>
+													</Link>
 												</li>
 											</ul>
 

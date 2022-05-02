@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AboutPlayers from "./about/aboutplayers";
+import LearnBlogs from "./about/morelearn/learnblogs";
 
 class Learn extends React.Component {
 	state = {};
@@ -25,6 +26,8 @@ class Learn extends React.Component {
                 Show what the rules are etc
                 */}
 				<AboutPlayers />
+
+				<LearnBlogs />
 			</React.Fragment>
 		);
 	}

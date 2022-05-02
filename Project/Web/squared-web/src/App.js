@@ -23,6 +23,7 @@ import AboutPlayers from "./components/public_pages/about/aboutplayers";
 import GeneralFooter from "./components/reuseable/navigation/footer";
 import logo from "./images/squared-logo.png";
 import Store from "./components/public_pages/store/store";
+import BlogDetail from "./components/public_pages/about/morelearn/blogDetail";
 
 class App extends Component {
 	state = {
@@ -68,7 +69,7 @@ class App extends Component {
 				<div className='content'>
 					<Switch>
 						<Route path='/' exact component={HomePage} />
-						<Route path='/game' component={Game} />
+						<ProtectedRoute path='/game' component={Game} />
 						{/* To test Leaderboard then will use it for purchase history ProtectedRoute*/}
 						<Route path='/leaderboard' component={Leaderboard} />
 						<Route path='/learngame' component={Learn} />
@@ -77,6 +78,7 @@ class App extends Component {
 						<Route path='/ourteam' component={AboutTeam} />
 						<Route path='/aboutplayers' component={AboutPlayers} />
 						<Route path='/gamestore' component={Store} />
+						<Route path='/blogdetail/:tutorialTitle' component={BlogDetail} />
 
 						<Route path='/logout' component={LogOut} />
 						<Route path='/notfound' component={NotFound} />

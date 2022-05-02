@@ -1,0 +1,44 @@
+[
+	{
+		"productTitle": "Yellow Die",
+
+		"productImageUrl": "https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/Squared%2FStoreAssets%2Fdie1.png?alt=media&token=df7f851e-04f9-4a99-b894-9b4bf5f7ba3c",
+		"productDescription": "This Die goes well with the Yellow character.",
+		"productPrice": 2.99
+	},
+	{
+		"productTitle": "White Die",
+
+		"productImageUrl": "https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/Squared%2FStoreAssets%2Fdie2.png?alt=media&token=243d648c-2c44-4e81-a913-dd92a105f582",
+		"productDescription": "This Die goes well with any character.",
+		"productPrice": 2.99
+	},
+	{
+		"productTitle": "Green Figure",
+
+		"productImageUrl": "https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/Squared%2FStoreAssets%2Ffigure_g.png?alt=media&token=95766dfd-2091-471e-8fa9-8be2e7680f7f",
+		"productDescription": "This Green figure goes well with the Green character.",
+		"productPrice": 4.99
+	},
+	{
+		"productTitle": "Handheld Game Sticker",
+
+		"productImageUrl": "https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/Squared%2FStoreAssets%2FRetroGameStreamerartboard-04.png?alt=media&token=db2ed4d1-178e-4b67-b423-275a8d32ddf9",
+		"productDescription": "This Game Sticker goes well with the your profile.",
+		"productPrice": 6.5
+	},
+	{
+		"productTitle": "Gaming Chair Sticker",
+
+		"productImageUrl": "https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/Squared%2FStoreAssets%2Fdie1.png?alt=media&token=df7f851e-04f9-4a99-b894-9b4bf5f7ba3c",
+		"productDescription": "Representing your favorite gaming chairs to other players.",
+		"productPrice": 0.99
+	},
+	{
+		"productTitle": "Yellow Figure",
+
+		"productImageUrl": "https://firebasestorage.googleapis.com/v0/b/keijaoh-576a0.appspot.com/o/Squared%2FStoreAssets%2Ffigure_y.png?alt=media&token=791c0200-29df-4499-9b18-cf9fd9e9786b",
+		"productDescription": "This Figure goes well with the Yellow character.",
+		"productPrice": 2.99
+	}
+]

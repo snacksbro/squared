@@ -211,25 +211,45 @@ const NavBar = ({ user }) => {
 								</Link>
 							</li>
 						</ul>
-						<div className='others-option'>
-							<div className='d-flex align-items-center'>
-								<div className='option-item'>
-									<Link to='/register' className='default-btn'>
-										Sign Up
-									</Link>
+						{!user.sub && (
+							<React.Fragment>
+								<div className='others-option'>
+									<div className='d-flex align-items-center'>
+										<div className='option-item'>
+											<Link to='/register' className='default-btn'>
+												Sign Up
+											</Link>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-						&nbsp;
-						<div className='others-option'>
-							<div className='d-flex align-items-center'>
-								<div className='option-item'>
-									<Link to='/login' className='default-btn'>
-										Login
-									</Link>
+								&nbsp;
+								<div className='others-option'>
+									<div className='d-flex align-items-center'>
+										<div className='option-item'>
+											<Link to='/login' className='default-btn'>
+												Login
+											</Link>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
+							</React.Fragment>
+						)}
+						{user.sub && (
+							<React.Fragment>
+								<div className='others-option'>
+									<div className='d-flex align-items-center'>
+										<div className='option-item'>
+											<Link
+												to='/logout'
+												className='default-btn'
+												style={{ backgroundColor: "red" }}>
+												Log Out
+											</Link>
+										</div>
+									</div>
+								</div>
+							</React.Fragment>
+						)}
 					</div>
 				</div>
 			</nav>
